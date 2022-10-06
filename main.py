@@ -17,8 +17,14 @@ conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
 print("Database connected successfully")
  
 cur = conn.cursor()
-cur.execute("""
-    
+cur.execute ("""
+              CREATE TABLE APPOINTMENT(
+                APP_ID SERIAL PRIMARY KEY,
+                C_ID INTEGER REFERENCES CUSTOMER(C_ID),
+                B_ID INTEGER REFERENCES BORKER(B_ID),
+                P_ID INTEGER REFERENCES PROPERTY(P_ID),
+                A_DATE  DATE NOT NULL
+                )            
   """)
 conn.commit()
 conn.close()
@@ -61,3 +67,43 @@ def search():
     BHK =request.form.get("BHK")
     print("city",city,"Price",Price)
     return render_template("Agents.html")
+
+
+    ''' 
+EXECUT EACH CERATE QUERY ONR BY ON USING 
+    # CUSTOMER TABLE 
+            create table customer(
+                C_ID Serial primary key,
+                C_NAME VARCHAR(50),
+                MOBILE_NO CHAR(10),
+                EMAIL_ID VARCHAR(50),
+                PASSWORD VARCHAR(10)
+             )   
+             create table BORKER(
+                B_ID Serial primary key,
+                B_NAME VARCHAR(50) NOT NULL,
+                MOBILE_NO CHAR(10) NOT NULL,
+                EMAIL_ID VARCHAR(50) NOT NULL,
+                PASSWORD VARCHAR(10) NOT NULL,
+                ADDRESS TEXT
+             );  
+              create table PROPERTY(
+                P_ID SERIAL PRIMARY KEY,
+                TOTAL_SQFT NUMERIC NOT NULL,
+                PRICE   INTEGER,
+                AREA VARCHAR(50) NOT NULL,
+                ADDRESS VARCHAR(50) NOT NULL,
+                SIZE SMALLINT,
+                BALCONY SMALLINT,
+                AVAILABILITY DATE NOT NULL,
+                BATH SMALLINT NOT NULL,
+                B_ID INTEGER REFERENCES BORKER(B_ID) ON DELETE SET NULL,  
+             );
+             CREATE TABLE APPOINTMENT(
+                APP_ID SERIAL PRIMARY KEY,
+                C_ID INTEGER REFERENCES CUSTOMER(C_ID),
+                B_ID INTEGER REFERENCES BORKER(B_ID),
+                P_ID INTEGER REFERENCES PROPERTY(P_ID),
+                A_DATE  DATE NOT NULL,
+                
+             )'''
