@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <link rel="preconnect" href="https://font.googleapis.com">
+    <link rel="preconnect" href="https://font.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://font.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;
+    0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+      body{
+        background-image: url("{{ url_for('static',filename='bulite_in/house2.jpg') }}");
+      }
+    </style>
+</head>
+<body background="{{ url_for('static',filename='bulite_in/house2.jpg') }}">
+ <section class="about">
+   <div class="main">
+     <div class = "about-text">
+       <h1>About Us</h1>
+       <h5>Get Your<span> Dream Home</span></h5>
+       <p>Real estate is a type of business for selling, buying, renting land, buildings and offices.
+        Real estate agencies duties include, to give the property on rent or else to sell the property.
+        Our website is the best place where you can find the desired result and can search for the place
+        where you can live properties like building, retail sites, flats, houses, bungalows etc. Many people
+        search for property for many purposes like residence, offices, faculty and etc. Every individual wants
+        his house to be in the best location with best facilities. Offices should be near market area in order
+        to increase sales and productivity. The manual real estate agency follows a lengthy and hectic process
+        with high cost of purchase. People need to meet the agent in person, for checking the Property details
+        and also needs to visit the location. It takes long time to look for the desired location and desired
+        type of property. Thus, Our website has proposed a system to overcome this difficulty. This website can
+        help you to get best property by just sitting at home or anywhere. People can book their favorite property
+        online just after a few clicks. In this system the agents can add the property for selling/ renting purpose
+        and users can buy or book a property for rent. Agents can also add the advertises of properties and also can
+        check the list of registered clients. Clients can view the properties for rent or for buying purpose. He/ she
+        can mark the favorite properties and can also book appointment for visiting the viewed favorite places.	Also
+        get the desired price for the houses as the market cost.</p>
+       <button type="button">Know More</button>
+       <button type="button"><a href="/"> <h3> Home page</h3></a></button>
+     </div>
+    </div>
+ </section>
+
+</body>
+</html>

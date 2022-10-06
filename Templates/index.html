@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Sales Prediction & Services </title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <style >
+        body{
+            background-image:url("{{ url_for('static',filename='bulite_in/house.jpeg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 100%;
+
+        }
+    </style>
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header>
+
+    <a href="#" class="logo"><span>!Ntɘrior</span>Estate</a>
+
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#services">services</a>
+        <a href="#contact">contact</a>
+        <a href="/About_us">About us</a>
+    </nav>
+
+    <div class="icons">
+        <div id="menu-bars" class="fas fa-bars"></div>
+        <a href="/login" class="fas fa-user"></a>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <form action = "/se" , method="POST">
+        <h3>find your perfect home</h3>
+
+        <div class="inputBox">
+            
+            <input type="search" name="City" placeholder="City" id="">
+            <input type="search" name="Price" placeholder="Maximum Price" id="">
+
+            <select name="Balcony" id="">
+                <option value="" disabled hidden selected>Balcony</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                
+            </select>
+            
+            <select name="BHK" id="">
+                <option value="" disabled hidden selected>BHK</option>
+                <option value="1 ">1 BHK</option>
+                <option value="2 ">2 BHK</option>
+                <option value="3 ">3 BHK</option>
+                <option value="4 ">4 BHK</option>
+               
+            </select>
+           
+        </div>
+
+        <input type="submit" value="search property" class="btn">
+        <input type="submit" value="search" class="btn">
+
+    </form>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- services section starts  -->
+
+<section class="services" id="services">
+
+    <h1 class="heading"> our <span>services</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="images/s-3.png" alt="">
+            <h3>selling home</h3>
+            <p>Giving our best to find you the perfect place that you want</p>
+            <p> your dream house!</p>
+            <a href="#" class="btn">learn more</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- services section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+<h1 class="heading"> <span>contact</span> us </h1>
+
+<div class="icons-container">
+
+    <div class="icons">
+        <img src="images/icon-1.png" alt="">
+        <h3>phone number</h3>
+        <p>+91-0009998885</p>
+        <p>+91-0009998886</p>
+    </div>
+
+    <div class="icons">
+        <img src="images/icon-2.png" alt="">
+        <h3>email address</h3>
+        <p>housingcorporate68@gmail.com</p>
+        <p>housingcorporate69@gmail.com</p>
+    </div>
+
+     <div class="icons">
+        <img src="images/icon-3.png" alt="">
+        <h3>office address</h3>
+        <p>UM Builders, Ranjhi Jabalpur East, District Jabalpur - 482011</p>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <form action="">
+        <div class="inputBox">
+            <input type="text" placeholder="Name">
+            <input type="number" placeholder="Number">
+        </div>
+        <div class="inputBox">
+            <input type="email" placeholder="Email">
+            <input type="text" placeholder="Subject">
+        </div>
+        <textarea name="" placeholder="Message" id="" cols="30" rows="10"></textarea>
+        <input type="submit" value="Send Message" class="btn">
+    </form>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7334.116216790215!2d79.99502605967788!3d23.204552856764366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981aed5e4836773%3A0x74ea3ff73f3ae5e4!2sRanjhi%2C%20Jabalpur%2C%20Madhya%20Pradesh%20482011!5e0!3m2!1sen!2sin!4v1662669830363!5m2!1sen!2sin" width="580" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</div>
+
+</section>
+
+<!-- contact section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="footer-container">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>branch location</h3>
+                <a href="#">Delhi</a>
+                <a href="#">Mumbai</a>
+                <a href="#">Chennai</a>
+                <a href="#">Kolkata</a>
+                <a href="#">Bengaluru</a>
+                <a href="#">Bhopal</a>
+                <a href="#">Indore</a>
+                <a href="#">Jabalpur</a>
+            </div> 
+            
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#">home</a>
+                <a href="#">services</a>
+                <a href="#">agents</a>
+                <a href="#">contact</a>
+            </div> 
+
+            <div class="box">
+                <h3>extra links</h3>
+                <a href="#">my account</a>
+                <a href="#">my favorite</a>
+                <a href="#">my list</a>
+            </div> 
+
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#">facebook</a>
+                <a href="#">twitter</a>
+                <a href="#">instagram</a>
+                <a href="#">linkedin</a>
+            </div> 
+
+        </div>
+
+        <div class="credit">created by <span> UtkArsh Rajak & Mohit Dubey Team </span> | all rights reserved! </div>
+
+    </div>
+
+</section>
+
+<!-- footer section ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- javascript part  -->
+<script>
+
+let menu = document.querySelector('#menu-bars');
+let navbar = document.querySelector('.navbar');
+
+menu.onclick = () =>{
+    navbar.classList.toggle('active');
+    menu.classList.toggle('fa-times');
+}
+
+window.onscroll = () =>{
+    navbar.classList.remove('active');
+    menu.classList.remove('fa-times');
+}
+
+</script>
+
+</body>
+</html>
