@@ -32,18 +32,21 @@
 		    <input type='checkbox'class='check-box'><span>Remember Password</span>
 		    <button type='submit'class='submit-btn'>Log in</button>
 		 </form>
-		 <form id='register' class='input-group-register'>
-		     <input type='text'class='input-field'placeholder='First Name' required>
-		     <input type='text'class='input-field'placeholder='Last Name ' required>
-		     <input type='email'class='input-field'placeholder='Email Id' required>
-		     <input type='password'class='input-field'placeholder='Enter Password' required>
+		 <form id='register' class='input-group-register' action="/register" method="post">
+		     <input type='text'class='input-field'placeholder='First Name' name="First_Name" required>
+		     <input type='text'class='input-field'placeholder='Last Name ' name="Last_Name" required>
+		     <input type='text'class='input-field'placeholder='Mobile no' name="Mobile" required>
+             <input type='email'class='input-field'placeholder='Email Id'  name="Email_Id" required>
+		     <input type='password'class='input-field'placeholder='Enter Password' name="Password" required>
 		     <input type='password'class='input-field'placeholder='Confirm Password'  required>
+             <button type='submit'class='submit-btn'>Register</button>
 		     <input type='checkbox'class='check-box'><span>I agree to the terms & conditions</span>
-                    <button type='submit'class='submit-btn'>Register</button>
+             
+             <button type='submit'class='submit-btn'>Log in</button>
 	         </form>
             </div>
         </div>
-     </div>
+     </div> 
     <script>
         var x=document.getElementById('login');
 		 var y=document.getElementById('register');

@@ -16,7 +16,7 @@ conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
                         host=DB_HOST, port=DB_PORT)
 print("Database connected successfully")
  
-cur = conn.cursor()
+'''cur = conn.cursor()
 cur.execute ("""
               CREATE TABLE APPOINTMENT(
                 APP_ID SERIAL PRIMARY KEY,
@@ -28,7 +28,7 @@ cur.execute ("""
   """)
 conn.commit()
 conn.close()
-
+'''
 app = Flask(__name__)
 
 @app.route("/")
@@ -57,6 +57,40 @@ def home():
 @app.route("/About_us")
 def about():
     return render_template("AboutUs.html")
+
+
+''' registertion for new user '''
+@app.route("/register" ,methods=["POST"])
+def register_new():
+    f1 = request.form.get("First_Name")
+    l1 = request.form.get("Last_Name")
+    email  = request.form.get("Email_Id")
+    password = request.form.get("Password")
+    mobile =  request.form.get("Mobile")
+    
+    if (f1 or l1 or email or password or mobile)=='':
+        return render_template("login.html")
+
+    f1 =f1 +" "+l1
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
+                        host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    query_insert="""insert into customer (C_NAME,MOBILE_NO,EMAIL_ID,PASSWORD)
+              values(%s,%s,%s,%s)  """
+    record_to_insert = (f1,mobile,email,password)
+    cur.execute(query_insert, record_to_insert)         
+    
+   # print("record store successfully")
+
+    conn.commit()
+    count = cur.rowcount
+
+    conn.close()
+   
+    return render_template("login.html")
+
+
+
 
 ''' search request  routes '''
 @app.route("/se", methods=["POST"])
