@@ -32,6 +32,8 @@ conn.close()
                 EMAIL_ID VARCHAR(50),
                 PASSWORD VARCHAR(10)
              )   
+              ALTER TABLE customer
+ADD CONSTRAINT customer_unique UNIQUE ( MOBILE_NO ,EMAIL_ID); 
              create table BORKER(
                 B_ID Serial primary key,
                 B_NAME VARCHAR(50) NOT NULL,
@@ -40,6 +42,8 @@ conn.close()
                 PASSWORD VARCHAR(10) NOT NULL,
                 ADDRESS TEXT
              );  
+             ALTER TABLE BORKER
+ADD CONSTRAINT BORKER_unique UNIQUE ( MOBILE_NO ,EMAIL_ID);    
               create table PROPERTY(
                 P_ID SERIAL PRIMARY KEY,
                 TOTAL_SQFT NUMERIC NOT NULL,

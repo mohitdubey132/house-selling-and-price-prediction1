@@ -16,19 +16,14 @@ conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
                         host=DB_HOST, port=DB_PORT)
 print("Database connected successfully")
  
-'''cur = conn.cursor()
+cur = conn.cursor()
 cur.execute ("""
-              CREATE TABLE APPOINTMENT(
-                APP_ID SERIAL PRIMARY KEY,
-                C_ID INTEGER REFERENCES CUSTOMER(C_ID),
-                B_ID INTEGER REFERENCES BORKER(B_ID),
-                P_ID INTEGER REFERENCES PROPERTY(P_ID),
-                A_DATE  DATE NOT NULL
-                )            
+              ALTER TABLE BORKER
+ADD CONSTRAINT BORKER_unique UNIQUE ( MOBILE_NO ,EMAIL_ID);        
   """)
 conn.commit()
 conn.close()
-'''
+
 app = Flask(__name__)
 
 @app.route("/")
