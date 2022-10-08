@@ -81,7 +81,7 @@ def register_new():
        
     except Exception as e:
         maessage= "there is an problem "+ str(e)
-        return  render_template("login.html",massage = maessage)
+        return   maessage
     finally :
          conn.commit()
          count = cur.rowcount
