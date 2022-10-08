@@ -26,9 +26,9 @@
                     <button type='button'onclick='login()'class='toggle-btn'>Log In</button>
                     <button type='button'onclick='register()'class='toggle-btn'>Register</button>
                 </div>
-                <form id='login' class='input-group-login'>
-                    <input type='text'class='input-field'placeholder='Email Id' required >
-		    <input type='password'class='input-field'placeholder='Enter Password' required>
+                <form id='login' class='input-group-login' action="/login_customer" method="post">
+                    <input type='text'class='input-field'placeholder='Email Id' name="email" required >
+		    <input type='password'class='input-field'placeholder='Enter Password' name="password" required>
 		    <input type='checkbox'class='check-box'><span>Remember Password</span>
 		    <button type='submit'class='submit-btn'>Log in</button>
 		 </form>
