@@ -67,21 +67,27 @@ def register_new():
         return render_template("login.html")
 
     f1 =f1 +" "+l1
-    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
-                        host=DB_HOST, port=DB_PORT)
-    cur = conn.cursor()
-    query_insert="""insert into customer (C_NAME,MOBILE_NO,EMAIL_ID,PASSWORD)
-              values(%s,%s,%s,%s)  """
-    record_to_insert = (f1,mobile,email,password)
-    cur.execute(query_insert, record_to_insert)         
+    try:
+        conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
+                            host=DB_HOST, port=DB_PORT)
+        cur = conn.cursor()
+        query_insert="""insert into customer (C_NAME,MOBILE_NO,EMAIL_ID,PASSWORD)
+                values(%s,%s,%s,%s)  """
+        record_to_insert = (f1,mobile,email,password)
+        cur.execute(query_insert, record_to_insert)         
+            
+        # print("record store successfully")
+
+       
+    except Exception as e:
+        maessage= "there is an problem "+ str(e)
+        return  render_template("login.html",massage = maessage)
+    finally :
+         conn.commit()
+         count = cur.rowcount
+         conn.close()
+
     
-   # print("record store successfully")
-
-    conn.commit()
-    count = cur.rowcount
-
-    conn.close()
-   
     return render_template("login.html")
 
 

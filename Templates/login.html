@@ -32,7 +32,7 @@
 		    <input type='checkbox'class='check-box'><span>Remember Password</span>
 		    <button type='submit'class='submit-btn'>Log in</button>
 		 </form>
-		 <form id='register' class='input-group-register' action="/register" method="post">
+		 <form id='register' class='input-group-register' action="/register" method="post">{{Message}}
 		     <input type='text'class='input-field'placeholder='First Name' name="First_Name" required>
 		     <input type='text'class='input-field'placeholder='Last Name ' name="Last_Name" required>
 		     <input type='text'class='input-field'placeholder='Mobile no' name="Mobile" required>
@@ -41,8 +41,7 @@
 		     <input type='password'class='input-field'placeholder='Confirm Password'  required>
              <button type='submit'class='submit-btn'>Register</button>
 		     <input type='checkbox'class='check-box'><span>I agree to the terms & conditions</span>
-             
-             <button type='submit'class='submit-btn'>Log in</button>
+             <button type='submit'class='submit-btn'>Log in{{Message}}</button>
 	         </form>
             </div>
         </div>
