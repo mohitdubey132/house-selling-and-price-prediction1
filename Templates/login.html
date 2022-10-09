@@ -20,6 +20,9 @@
                 </ul>
             </nav>
         </div>
+           {% if alart == 'y' %}
+               <p style="color: red"> you have enter wrong id  password</p>
+            {% endif %}
           <div class="form-box">
                 <div class='button-box'>
                     <div id='btn'></div>
@@ -32,19 +35,19 @@
 		    <input type='checkbox'class='check-box'><span>Remember Password</span>
 		    <button type='submit'class='submit-btn'>Log in</button>
 		 </form>
-		 <form id='register' class='input-group-register' action="/register" method="post">{{Message}}
+		 <form id='register' class='input-group-register' action="/register" method="post" autocomplete="off">{{Message}}
 		     <input type='text'class='input-field'placeholder='First Name' name="First_Name" required>
 		     <input type='text'class='input-field'placeholder='Last Name ' name="Last_Name" required>
-		     <input type='text'class='input-field'placeholder='Mobile no' name="Mobile" required>
-             <input type='email'class='input-field'placeholder='Email Id'  name="Email_Id" required>
+		     <input type='text'class='input-field'placeholder='Mobile no' name="Mobile" onblur="">
+             <input type='email' class=''placeholder='Email Id'  name="Email_Id" required>
 		     <input type='password'class='input-field'placeholder='Enter Password' name="Password" required>
 		     <input type='password'class='input-field'placeholder='Confirm Password'  required>
              <button type='submit'class='submit-btn'>Register</button>
-		     <input type='checkbox'class='check-box'><span>I agree to the terms & conditions</span>
+		     <input type='checkbox'class='check-box'><span>I agree to the terms & conditions {{Message}}</span>
              <button type='submit'class='submit-btn'>Log in{{Message}}</button>
 	         </form>
             </div>
-        </div>
+        </div>z
      </div> 
     <script>
         var x=document.getElementById('login');
@@ -72,6 +75,10 @@
                 modal.style.display = "none";
             }
         }
+        const mobile_number=document.getElementById('Mobile')
+        mobile_number.addEventListener('keyup',function(){
+              alert('only numbers allowend here ?')
+        })
     </script>
  </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <h1>customer dash doard</h1><br>
+        <h2>{{c_name}}</h2><br>
+        <h3>{{Email}}</h3>
+        <h3>{{Mobile}}</h3>
+    </section>
+    <hr>
+    <section>
+        <h2>your appointments </h2>
+        <table border="1">
+            <tr>
+                <th>date</th>
+                <th>broker name</th>
+                <th>broker mobile nu</th>
+                <th>property address</th>
+            </tr>
+            {% for row in appointments: %}
+                <tr>
+                <td> {{row[0]}} </td>
+                <td> {{row[1]}} </td>
+                <td> {{row[2]}} </td>
+                <td> {{row[3]}} </td>
+                </tr>
+            {% endfor %}
+        </table> 
+
+    </section>
+    <hr>
+    <section>
+        saved property
+    </section>
+</body>
+</html>

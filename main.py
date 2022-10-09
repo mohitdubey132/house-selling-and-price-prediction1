@@ -74,11 +74,8 @@ def register_new():
         query_insert="""insert into customer (C_NAME,MOBILE_NO,EMAIL_ID,PASSWORD)
                 values(%s,%s,%s,%s)  """
         record_to_insert = (f1,mobile,email,password)
-        cur.execute(query_insert, record_to_insert)         
-            
-        # print("record store successfully")
-
-       
+        cur.execute(query_insert, record_to_insert)                     
+        # print("record store successfully")       
     except Exception as e:
         maessage= "there is an problem "+ str(e)
         return   maessage
@@ -102,12 +99,56 @@ def search():
     BHK =request.form.get("BHK")
     print("city",city,"Price",Price)
     return render_template("Agents.html")
+
+
+
 @app.route("/login_customer" , methods=["POST"])
 def login_customer():
     email = request.form.get("email")
     password= request.form.get("password")
+    email = email.replace("'","")
+    email = email.lower()
+    password = password.replace(";","")
+    try:
+        conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
+                            host=DB_HOST, port=DB_PORT)
+        cur = conn.cursor()
+        query_To_login="select * from customer where email_id = %s and password =%s "
+                                                                               # '''EMAIL_ID,PASSWORD'''               
+        #to_validate = str(email,)
+        cur.execute(query_To_login,(email,password,))  
+        #cur.execute(query_To_login)       
+        records = cur.fetchall()
+        for row in records:
+             id = row[0]
+             name = row[1]
+             mobile =row[2]
+             email= row[3]
+        count = cur.rowcount
+        flag = 'no'
+        if count != 1:
+            flag = 'y'
+            print ("count==",count,email,'   ',password)
+            return render_template("login.html",alart = flag)
+        # print("record store successfully")       
+    except Exception as e:
+        maessage= "there is an problem "+ str(e)
+        return   maessage
+    finally :
+         conn.commit()
+         #conn.close()
+    '''select appointments list ''' 
+    cur = conn.cursor()
+    find_appointment ="""select a.a_date , b.b_name, b.mobile_no, p.address from appointment a inner join borker b 
+                                  on a.b_id=b.b_id 
+                                  inner join property p
+                                  on a.p_id= p.p_id
+                                  where a.c_id = %s
+                                  """
+    cur.execute(find_appointment,(id,))
+    results = cur.fetchall()                              
+    return render_template("customer_dashboard.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
     
-
     ''' 
    EXECUT EACH CERATE QUERY ONR BY ON USING 
     # CUSTOMER TABLE 
