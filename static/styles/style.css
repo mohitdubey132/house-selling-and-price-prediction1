@@ -117,7 +117,7 @@ header .icons #menu-bars{
 
 .home{
     min-height: 100vh;
-    background:url(../images/pexels-pixabay-302769.jpg) no-repeat;
+    background:url(/static/bulite_in/pexels-pixabay-302769.jpg) no-repeat; 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
