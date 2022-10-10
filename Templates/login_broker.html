@@ -29,22 +29,25 @@
                     <button type='button'onclick='login()'class='toggle-btn'>Log In</button>
                     <button type='button'onclick='register()'class='toggle-btn'>Register</button>
                 </div>
-                <form id='login' class='input-group-login' action="/login_customer" method="post">
+                <form id='login' class='input-group-login' action="/login_broker" method="post">
                     <input type='text'class='input-field'placeholder='Email Id' name="email" required >
 		    <input type='password'class='input-field'placeholder='Enter Password' name="password" required>
 		    <input type='checkbox'class='check-box'><span>Remember Password</span>
 		    <button type='submit'class='submit-btn'>Log in</button>
 		 </form>
-		 <form id='register' class='input-group-register' action="/register" method="post" autocomplete="off">{{Message}}
-		     <input type='text'class='input-field'placeholder='First Name' name="First_Name" required>
+		 <form id='register' class='input-group-register' action="/register_broker" method="post" autocomplete="off">{{Message}}
+		     
+             <input type='text'class='input-field'placeholder='First Name' name="First_Name" required>
 		     <input type='text'class='input-field'placeholder='Last Name ' name="Last_Name" required>
 		     <input type='text'class='input-field'placeholder='Mobile no' name="Mobile" onblur="">
-             <input type='email' class=''placeholder='Email Id'  name="Email_Id" required>
-		     <input type='password'class='input-field'placeholder='Enter Password' name="Password" required>
+             <input type='text' class='input-field'  placeholder="Email id " name="Email_Id" required>
+             <label for="Addrress of office">Address</label>
+             <textarea name="Address" id="Address" cols="30" rows="3"  class="input-field" placeholder="enter address of pffice"></textarea>
+		     <input type='password'class='input-field' placeholder='Enter Password' name="Password" required>
 		     <input type='password'class='input-field'placeholder='Confirm Password'  required>
              <button type='submit'class='submit-btn'>Register</button>
 		     <input type='checkbox'class='check-box'><span>I agree to the terms & conditions {{Message}}</span>
-             </form>
+	         </form>
             </div>
         </div>z
      </div> 

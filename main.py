@@ -45,6 +45,10 @@ def start():
 def login():
     return render_template("login.html")
 
+@app.route("/login_2")    
+def login_2():
+    return render_template("login_broker.html")
+
 @app.route("/Home") 
 def home():
     return render_template("index.html")   
@@ -153,3 +157,37 @@ def login_customer():
    EXECUT EACH CERATE QUERY ONR BY ON USING 
     # CUSTOMER TABLE 
    '''
+
+''' registertion for new user '''
+@app.route("/register_broker" ,methods=["POST"])
+def register_new_broker():
+    f1 = request.form.get("First_Name")
+    l1 = request.form.get("Last_Name")
+    email  = request.form.get("Email_Id")
+    password = request.form.get("Password")
+    mobile =  request.form.get("Mobile")
+    address = request.form.get("Address")
+    if (f1 or l1 or email or password or mobile)=='':
+        return render_template("login.html")
+
+    f1 =f1 +" "+l1
+    try:
+        conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
+                            host=DB_HOST, port=DB_PORT)
+        cur = conn.cursor()
+        query_insert="""insert into borker (b_id,b_NAME,MOBILE_NO,EMAIL_ID,PASSWORD,ADDRESS)
+                values(%s,%s,%s,%s,%s,%s)  """
+        record_to_insert = (50001,f1,mobile,email,password,address)
+        cur.execute(query_insert, record_to_insert)                     
+        # print("record store successfully")       
+    except Exception as e:
+        maessage= "there is an problem "+ str(e)
+        return   maessage
+    finally :
+         conn.commit()
+         count = cur.rowcount
+         conn.close()
+
+    
+    return render_template("login_broker.html")
+
