@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="sr-modal__content sr-modal__content--right ">
+        <div class="sr-modal__header">
+          <a class="sr-modal__close" data-target="auth-modal" data-action="modal-close">
+            <i class="icon-close"></i>
+          </a>
+        </div>
+      <div class="sr-modal__body ">
+        
+    <div class="form-flow__modes auth__modes">
+      <div class="form-flow__mode" data-mode="register">
+        <div class="form-flow__header">
+          <div class="form-flow__img">
+            <img src="https://assets.interviewbit.com/assets/ibpp/onboarding/signup-5f66d5e693f87620edbae9b37e48961092c1681f21bd63a33bf5d69f6fffb482.svg.gz">
+          </div>
+          <h2 class="form-flow__title dark bolder">
+            Begin your success journey!
+          </h2>
+        </div>
+        <div class="form-flow__subtitle">Sign Up using</div>
+  
+        <div class="auth-providers">
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/google_oauth2/" class="auth-providers__action" data-type="google" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'google')">
+      <img data-gtm-element="google" src="https://assets.interviewbit.com/assets/ibpp/onboarding/google-36d787f315453b7698d0f060d807e211b297198aa30b2fa59d2af526d1035e92.svg.gz">
+    </a>
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/facebook/" class="auth-providers__action" data-type="facebook" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'facebook')">
+      <img data-gtm-element="facebook" src="https://assets.interviewbit.com/assets/ibpp/onboarding/facebook-ce5cc4f440dc3cb23e5a7bbe9db41da57804f29595c83dd7b603ac79c8034724.svg.gz">
+    </a>
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/linkedin/" class="auth-providers__action" data-type="linkedin" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'linkedin')">
+      <img data-gtm-element="linkedin" src="https://assets.interviewbit.com/assets/ibpp/onboarding/linkedin-eba2839477afbc53e085df2352f4388f3470879ff9e191826d619cac64452992.svg.gz">
+    </a>
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/github/" class="auth-providers__action" data-type="github" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'github')">
+      <img data-gtm-element="github" src="https://assets.interviewbit.com/assets/ibpp/onboarding/github-e7de13c97e442cae5b2791c0045dbc2a2752b60a246dbbadd15f7e08b58183b9.svg.gz">
+    </a>
+  </div>
+  
+  
+        <div class="form-flow__form">
+          <form id="register-form" class="form" action="/users/" accept-charset="UTF-8" method="post" autocomplete="none" onsubmit="window.trackGaEvent('onboarding', 'signup-continue-clicked')">
+    <input type="hidden" name="authenticity_token" id="authenticity_token" value="ofvNejtZxPoOi26DC7naZ/lAMVFHyRTxwU+cqvhoqDCcbBfdexneC2ObY/xTB68rrYqewdOalxOboyWqVDD1Sg==">  <div class="form__fields">
+      
+  <div class="form-field " data-name="email">
+      <div class="form-field__label">
+        
+  <div class="form-label">
+    <div class="form-label__text">
+      Full name
+        <span class="form-label__required" data-class="asterisk-mark">*</span>
+    </div>
+  </div>
+      </div>
+    <div class="form-field__input">
+      
+        <input class="form-input gtm-track-element" name="user[name]" placeholder="Enter your name" required="" type="text" data-gtm-element="name">
+  
+    </div>
+    <div class="form-field__error form-field__error--hidden">
+    </div>
+  </div>
+      
+  <div class="form-field " data-name="email">
+      <div class="form-field__label">
+        
+  <div class="form-label">
+    <div class="form-label__text">
+      Email
+        <span class="form-label__required" data-class="asterisk-mark">*</span>
+    </div>
+  </div>
+      </div>
+    <div class="form-field__input">
+      
+        <input class="form-input gtm-track-element" name="user[email]" placeholder="Enter your email" required="" type="email" data-gtm-element="email">
+  
+    </div>
+    <div class="form-field__error form-field__error--hidden">
+    </div>
+  </div>
+      
+  <div class="form-field " data-name="password">
+      <div class="form-field__label">
+        
+  <div class="form-label">
+    <div class="form-label__text">
+      Password
+        <span class="form-label__required" data-class="asterisk-mark">*</span>
+    </div>
+  </div>
+      </div>
+    <div class="form-field__input">
+      
+        <input class="form-input gtm-track-element" name="user[password]" autocomplete="off" placeholder="Enter your password" required="" type="password" pattern=".{8,}" title="Password must contain at least 8 characters." data-gtm-element="password">
+  
+    </div>
+    <div class="form-field__error form-field__error--hidden">
+    </div>
+  </div>  </div>
+      <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
+  <div class="g-recaptcha " data-sitekey="6Lf3ngcTAAAAAAc199lejBXaJ5ZQbLp6MXHoRgWj"><div style="width: 304px; height: 78px;"><div><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Lf3ngcTAAAAAAc199lejBXaJ5ZQbLp6MXHoRgWj&amp;co=aHR0cHM6Ly93d3cuaW50ZXJ2aWV3Yml0LmNvbTo0NDM.&amp;hl=en&amp;v=vP4jQKq0YJFzU6e21-BGy3GP&amp;size=normal&amp;cb=8g7lgvsi93ug" width="304" height="78" role="presentation" name="a-u5iy3byz8sqr" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div>
+            <noscript>
+              <div>
+                <div style="width: 302px; height: 422px; position: relative;">
+                  <div style="width: 302px; height: 422px; position: absolute;">
+                    <iframe
+                      src="https://www.google.com/recaptcha/api/fallback?k=6Lf3ngcTAAAAAAc199lejBXaJ5ZQbLp6MXHoRgWj"
+                      frameborder="0" scrolling="no"
+                      style="width: 302px; height:422px; border-style: none;">
+                    </iframe>
+                  </div>
+                </div>
+                <div style="width: 300px; height: 60px; border-style: none;
+                  bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px;
+                  background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px;">
+                  <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                    class="g-recaptcha-response"
+                    style="width: 250px; height: 40px; border: 1px solid #c1c1c1;
+                    margin: 10px 25px; padding: 0px; resize: none;" value="">
+                  </textarea>
+                </div>
+              </div>
+            </noscript>
+  
+    <p class="form-error form-error--hidden"></p>
+  
+    <div class="form__actions">
+      <button class="form__action ibpp-button primary" type="submit">
+        Continue
+      </button>
+    </div>
+    <div class="hint-color h6">
+      By creating an account, I acknowledge that I have read and agree to InterviewBit’s
+      <a class="link bold m-h-5 h6" href="/pages/terms/">
+        Terms
+      </a>
+      and
+      <a class="link bold m-h-5 h6" href="/pages/privacy/">
+        Privacy Policy
+      </a>.
+    </div>
+    <label class="m-t-15">
+      Already have an account?
+      <a class="auth__switch auth__switch--primary link bold gtm-track-element" data-action="flow-switch" data-target="login" data-gtm-element="login" data-gtm-allowed-actions="click hover" onclick="window.trackGaEvent('onboarding', 'signup-to-signin')">
+        Log in
+      </a>
+    </label>
+  </form>
+  
+        </div>
+      </div>
+  
+      <div class="form-flow__mode auth__mode form-flow__mode--active" data-mode="login">
+        <div class="form-flow__header">
+          <div class="form-flow__img">
+            <img src="https://assets.interviewbit.com/assets/ibpp/onboarding/signup-5f66d5e693f87620edbae9b37e48961092c1681f21bd63a33bf5d69f6fffb482.svg.gz">
+          </div>
+          <h2 class="form-flow__title dark bolder">
+            Welcome back!
+          </h2>
+          <div class="auth-modal__message">
+            <!-- WILL DYNAMICALLY POPULATE IN CASE MOCO USER IS REGISTERED -->
+          </div>
+        </div>
+        <div class="form-flow__subtitle">Log In using</div>
+  
+        <div class="auth-providers">
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/google_oauth2/" class="auth-providers__action" data-type="google" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'google')">
+      <img data-gtm-element="google" src="https://assets.interviewbit.com/assets/ibpp/onboarding/google-36d787f315453b7698d0f060d807e211b297198aa30b2fa59d2af526d1035e92.svg.gz">
+    </a>
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/facebook/" class="auth-providers__action" data-type="facebook" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'facebook')">
+      <img data-gtm-element="facebook" src="https://assets.interviewbit.com/assets/ibpp/onboarding/facebook-ce5cc4f440dc3cb23e5a7bbe9db41da57804f29595c83dd7b603ac79c8034724.svg.gz">
+    </a>
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/linkedin/" class="auth-providers__action" data-type="linkedin" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'linkedin')">
+      <img data-gtm-element="linkedin" src="https://assets.interviewbit.com/assets/ibpp/onboarding/linkedin-eba2839477afbc53e085df2352f4388f3470879ff9e191826d619cac64452992.svg.gz">
+    </a>
+    <a data-gtm-allowed-actions="click hover" href="/users/auth/github/" class="auth-providers__action" data-type="github" onclick="window.trackGaEvent('onboarding', 'auth_provider_clicked', 'github')">
+      <img data-gtm-element="github" src="https://assets.interviewbit.com/assets/ibpp/onboarding/github-e7de13c97e442cae5b2791c0045dbc2a2752b60a246dbbadd15f7e08b58183b9.svg.gz">
+    </a>
+  </div>
+  
+  
+        <div class="auth__form">
+          <form id="login-form" action="/users/sign_in/" accept-charset="UTF-8" method="post" class="form" autocomplete="none" onsubmit="window.trackGaEvent('onboarding', 'signin-continue-clicked')">
+    <input type="hidden" name="authenticity_token" id="authenticity_token" value="ofvNejtZxPoOi26DC7naZ/lAMVFHyRTxwU+cqvhoqDCcbBfdexneC2ObY/xTB68rrYqewdOalxOboyWqVDD1Sg==">
+    <input name="utf8" type="hidden" value="✓">
+    <div class="form__fields">
+      
+  <div class="form-field " data-name="email">
+      <div class="form-field__label">
+        
+  <div class="form-label">
+    <div class="form-label__text">
+      Email
+        <span class="form-label__required" data-class="asterisk-mark">*</span>
+    </div>
+  </div>
+      </div>
+    <div class="form-field__input">
+      
+        <input class="form-input gtm-track-element" name="user[email]" placeholder="Enter your email" required="" type="email" data-gtm-element="email">
+  
+    </div>
+    <div class="form-field__error form-field__error--hidden">
+    </div>
+  </div>
+      
+  <div class="form-field " data-name="password">
+      <div class="form-field__label">
+        
+  <div class="form-label">
+    <div class="form-label__text">
+      Password
+        <span class="form-label__required" data-class="asterisk-mark">*</span>
+    </div>
+  </div>
+      </div>
+    <div class="form-field__input">
+      
+        <input class="form-input gtm-track-element" name="user[password]" placeholder="Enter your password" required="" type="password" data-gtm-element="password">
+  
+    </div>
+    <div class="form-field__error form-field__error--hidden">
+    </div>
+  </div>
+      <div class="form-field" data-name="remember_me">
+        <input class="form-input--inline gtm-track-element" type="checkbox" id="rememberme" name="user[remember_me]" checked="" data-gtm-element="remember_me" data-gtm-allowed-actions="click">
+        <label class="m-l-10" for="rememberme">Remember Me</label>
+      </div>
+    </div>
+    <p class="form-error form-error--hidden"></p>
+  
+    <div class="form__actions">
+      <button class="form__action ibpp-button primary gtm-track-element" type="submit" data-gtm-element="login" data-gtm-allowed-actions="click">
+        Continue
+      </button>
+    </div>
+    <div class="m-v-10">
+      <div class="m-b-10">
+        <a href="/users/password/new/" class="link bold gtm-track-element" data-gtm-element="forgot_password" data-gtm-allowed-actions="click hover" data-type="forgot-password">
+          Forgot Password
+        </a>
+      </div>
+      <div class="m-b-10">
+        <a href="/users/confirmation/new/" class="link bold gtm-track-element" data-gtm-element="confirmation_instruction" data-gtm-allowed-actions="click hover" data-type="instructions-pending">
+          Didn’t receive confirmation instructions?
+        </a>
+      </div>
+      <label class="m-b-10">
+        Not an InterviewBit user?
+        <a class="link bold m-l-5 gtm-track-element" data-action="flow-switch" data-target="register" data-gtm-element="sign_up" data-gtm-allowed-actions="click hover" onclick="window.trackGaEvent('onboarding', 'signin-to-signup')">
+          Sign up
+        </a>
+      </label>
+    </div>
+  </form>
+  
+        </div>
+      </div>
+    </div>
+  
+      </div>
+    </div>
+</body>
+</html>
