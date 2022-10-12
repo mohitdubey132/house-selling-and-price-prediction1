@@ -4,20 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/customer_dashboard.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
+    <style>
+      body{
+        background-color: rgb(253, 181, 181);
+      }
+      .head{
+        font-size:70px;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 200;
+        color: rgb(248, 27, 57);
+        background-color: rgb(142, 177, 253);
+        
+      }
+    </style>
 </head>
 <body>
-    
-    <section><button><a href="/">Home page</a></button>
-        <h1>customer dash doard</h1><br>
-        <h2>{{c_name}}</h2><br>
-        <h3>{{Email}}</h3>
-        <h3>{{Mobile}}</h3>
+  <h1 class="head"><center>Customer Dash Board</center> </h1>
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home Page</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/About_us">about us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Log out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Pridict </a>
+        </li>
+      </ul>
+     
+    <section id="cd1">
+        <h2> Name:  {{c_name}}</h2><br>
+        <h3>Email id: {{Email}}</h3>
+        <h3>Mobile: {{Mobile}}</h3>
     </section>
     <hr>
     <section>
         <h2>your appointments </h2>
-        <table border="1">
+        <table border="1" class="table table-striped">
             <tr>
                 <th>date</th>
                 <th>broker name</th>
@@ -46,6 +75,54 @@
     <hr>
     <section>
         saved property
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+             </div>
+             <div class="card-body">
+             <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+            
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
     </section>
 </body>
 </html>
