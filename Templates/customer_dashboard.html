@@ -10,6 +10,10 @@
     <style>
       body{
         background-color: rgb(253, 181, 181);
+        background-image: url("{{ url_for('static',filename='bulite_in/house.jpeg') }}");
+        background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 100%;
       }
       .head{
         font-size:70px;
@@ -17,6 +21,14 @@
         font-weight: 200;
         color: rgb(248, 27, 57);
         background-color: rgb(142, 177, 253);
+        
+      }
+      #cd1{
+        background-color: aliceblue;
+        opacity: 0.9;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: right;
+        text-shadow: 20em;
         
       }
     </style>
@@ -45,14 +57,14 @@
     </section>
     <hr>
     <section>
-        <h2>your appointments </h2>
+        <h2> <center>your appointments </center> 
         <table border="1" class="table table-striped">
             <tr>
                 <th>date</th>
                 <th>broker name</th>
                 <th>broker mobile nu</th>
                 <th>property address</th>
-            </tr>
+            </tr></h2>
             {% for row in appointments: %}
                 <tr>
                 <td> {{row[0]}} </td>
