@@ -2,6 +2,7 @@ from flask import Flask ,render_template, request
 import smtplib
 import random
 import psycopg2
+import db
 #  add email
 '''server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls()
@@ -66,29 +67,10 @@ def register_new():
     email  = request.form.get("Email_Id")
     password = request.form.get("Password")
     mobile =  request.form.get("Mobile")
-    
     if (f1 or l1 or email or password or mobile)=='':
         return render_template("login.html")
-
     f1 =f1 +" "+l1
-    try:
-        conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
-                            host=DB_HOST, port=DB_PORT)
-        cur = conn.cursor()
-        query_insert="""insert into customer (C_NAME,MOBILE_NO,EMAIL_ID,PASSWORD)
-                values(%s,%s,%s,%s)  """
-        record_to_insert = (f1,mobile,email,password)
-        cur.execute(query_insert, record_to_insert)                     
-        # print("record store successfully")       
-    except Exception as e:
-        maessage= "there is an problem "+ str(e)
-        return   maessage
-    finally :
-         conn.commit()
-         count = cur.rowcount
-         conn.close()
-
-    
+    db.create_customers(f1,mobile,email,password)    
     return render_template("login.html")
 
 
