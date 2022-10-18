@@ -1,19 +1,37 @@
 import psycopg2
-#  add email
-'''server = smtplib.SMTP('smtp.gmail.com',587)
-server.starttls()
-server.login('connectusjecmohit132@gmail.com','owjsnkodweasxjcc' )
+#  data base coonection 
+def connect_db():
+      DB_NAME = "Ghardekho"
+      DB_USER = "postgres"
+      DB_PASS = "github@0"
+      DB_HOST = "localhost"
+      DB_PORT = "5432"
+      conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
+                           host=DB_HOST, port=DB_PORT)
+      print("Database connected successfully")
+      cur = conn.cursor()
+      return cur,conn
+#---------------------------------------------------------------------------------#
+def create_customers(f1,mobile,email,password):
+            try: 
+                  f1,mobile,email,password= f1,mobile,email,password
+                  cur,conn = connect_db()
+                  query_insert="""insert into customer (C_NAME,MOBILE_NO,EMAIL_ID,PASSWORD)
+                              values(%s,%s,%s,%s)  """
+                  record_to_insert = (f1,mobile,email,password)
+                  cur.execute(query_insert, record_to_insert)                     
+                     # print("record store successfully")       
+            except Exception as e:
+               maessage= "there is an problem "+ str(e)
+               return   maessage
+            finally :
+                  conn.commit()
+                  count = cur.rowcount
+                  conn.close()
+
+
+
 '''
-DB_NAME = "Ghardekho"
-DB_USER = "postgres"
-DB_PASS = "github@0"
-DB_HOST = "localhost"
-DB_PORT = "5432"
-conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
-                        host=DB_HOST, port=DB_PORT)
-print("Database connected successfully")
- 
-cur = conn.cursor()
 cur.execute ("""
               CREATE TABLE APPOINTMENT(
                 APP_ID SERIAL PRIMARY KEY,
@@ -25,7 +43,7 @@ cur.execute ("""
   """)
 conn.commit()
 conn.close()
-'''create table customer(
+create table customer(
                 C_ID Serial primary key,
                 C_NAME VARCHAR(50),
                 MOBILE_NO CHAR(10),
@@ -57,3 +75,7 @@ ADD CONSTRAINT BORKER_unique UNIQUE ( MOBILE_NO ,EMAIL_ID);
                 B_ID INTEGER REFERENCES BORKER(B_ID) ON DELETE SET NULL,  
              );
             '''
+'''server = smtplib.SMTP('smtp.gmail.com',587)
+server.starttls()
+server.login('connectusjecmohit132@gmail.com','owjsnkodweasxjcc' )
+'''
