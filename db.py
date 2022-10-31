@@ -30,6 +30,60 @@ def create_customers(f1,mobile,email,password):
                   conn.close()
 
 
+# --------------------------------------------------------------------------------#
+def login(email,password):
+      try: 
+         email,password=email,password
+         cur,conn = connect_db()
+         query_To_login="select * from customer where email_id = %s and password =%s "
+         cur.execute(query_To_login,(email,password,))
+         records = cur.fetchall()
+         count = cur.rowcount
+         return records,count 
+      finally:
+         conn.commit()
+         count= cur.rowcount
+         conn.close()
+#----------------------------------------------------------------------------------#
+         #appointment method  
+def find_appointment(id):
+   try: 
+         id=id 
+         cur,conn = connect_db()
+         print('@1',id)
+         appointment ="""select a.a_date , b.b_name, b.mobile_no, p.address from appointment a inner join borker b 
+                                       on a.b_id=b.b_id 
+                                       inner join property p
+                                       on a.p_id= p.p_id
+                                       where a.c_id = %s
+                                       """
+         print("id value # importants  ",id)
+         cur.execute(appointment,(id,))
+         print('@2')
+         results = cur.fetchall()
+         return results
+
+   finally:
+      conn.commit()
+      conn.close()
+#-----------------------------------------------------------------------------------#
+        #delete appointments 
+def delete_appointments(id):
+   try:
+      cur,conn= connect_db()
+      delete_appointment =""" delete from appointment where app_id=%s
+                           """
+      cur.execute(delete_appointment,(id,))
+      message = "recorde deleted successfully"
+      return 
+   except Exception as e:
+               maessage= "there is an problem "+ str(e)
+               return   maessage
+
+   finally:
+      conn.commit()
+      conn.close()
+                                 
 
 '''
 cur.execute ("""

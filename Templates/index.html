@@ -63,10 +63,14 @@
         <a href="/About_us">About us</a>
     </nav>
 
-    <div class="icons">
+     {% if session.name %}
+    You are Register {{ session.name }} <a href="/logout">logout</a>.
+ {% else %}
+    You are not Register. <div class="icons">
         <div id="menu-bars" class="fas fa-bars"></div>
         <a href="/login" class="fas fa-user"></a>
-    </div>
+    </div>.
+ {% endif %}
 
 </header>
 

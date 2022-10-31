@@ -43,7 +43,7 @@
           <a class="nav-link" href="/About_us">about us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Log out</a>
+          <a class="nav-link" href="/log_out">Log out</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Pridict </a>
@@ -64,13 +64,25 @@
                 <th>broker name</th>
                 <th>broker mobile nu</th>
                 <th>property address</th>
-            </tr></h2>
+                <th>status</th>
+            </tr></h2><tr>
+              <td> row[0]}} </td>
+              <td> row[1]}} </td>
+              <td> row[2]}} </td>
+              <td> row[3]}} </td>
+              <td><button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete/">Delete</a></button>
+                <button type="button" class="btn btn-outline-success btn-lg"><a href="/delete/">Edit</a></button></td>
+              </tr>
             {% for row in appointments: %}
                 <tr>
                 <td> {{row[0]}} </td>
                 <td> {{row[1]}} </td>
                 <td> {{row[2]}} </td>
                 <td> {{row[3]}} </td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete/{{row[4]}}">Delete</a></button>
+                    <button type="button" class="btn btn-outline-success btn-lg"><a href="/edit/{{row[4]}}">Edit</a></button>
+                </td>
                 </tr>
             {% endfor %}
         </table> 

@@ -1,8 +1,14 @@
-from flask import Flask ,render_template, request
+from flask import Flask ,render_template, request, session, redirect
+from flask_session import Session
 import smtplib
 import random
 import psycopg2
 import db
+app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+ 
 #  add email
 '''server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls()
@@ -25,7 +31,7 @@ ADD CONSTRAINT BORKER_unique UNIQUE ( MOBILE_NO ,EMAIL_ID);
 conn.commit()
 conn.close()
 '''
-app = Flask(__name__)
+
 
 @app.route("/")
 def index():
@@ -96,45 +102,35 @@ def login_customer():
     email = email.lower()
     password = password.replace(";","")
     try:
-        conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
-                            host=DB_HOST, port=DB_PORT)
-        cur = conn.cursor()
-        query_To_login="select * from customer where email_id = %s and password =%s "
-                                                                               # '''EMAIL_ID,PASSWORD'''               
-        #to_validate = str(email,)
-        cur.execute(query_To_login,(email,password,))  
-        #cur.execute(query_To_login)       
-        records = cur.fetchall()
-        for row in records:
-             id = row[0]
-             name = row[1]
-             mobile =row[2]
-             email= row[3]
-        count = cur.rowcount
+        records,count =db.login(email,password)  
+        print ("login successful no error in that") 
         flag = 'no'
         if count != 1:
             flag = 'y'
             print ("count==",count,email,'   ',password)
             return render_template("login.html",alart = flag)
         # print("record store successfully")       
-    except Exception as e:
-        maessage= "there is an problem "+ str(e)
-        return   maessage
-    finally :
-         conn.commit()
-         #conn.close()
-    '''select appointments list ''' 
-    cur = conn.cursor()
-    find_appointment ="""select a.a_date , b.b_name, b.mobile_no, p.address from appointment a inner join borker b 
-                                  on a.b_id=b.b_id 
-                                  inner join property p
-                                  on a.p_id= p.p_id
-                                  where a.c_id = %s
-                                  """
-    cur.execute(find_appointment,(id,))
-    results = cur.fetchall()                              
-    return render_template("customer_dashboard.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
     
+        #maessage= "there is an problem "+ str(e)            try to remove problems 
+       #SSSS return   maessage
+    
+         #conn.close()
+       # ''' retriving user infomation  '''
+        id = 0
+        for record in records:
+            id = record[0] 
+            print(id)
+            name= record[1]
+            mobile = record[2]
+            email = record[3]
+        session["c_id"] = id
+        session["name"] = name
+        results = db.find_appointment(str(id))
+        print ("find_appointment  successful no error in that")
+        return render_template("customer_dashboard.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
+    except Exception as e:
+        message= str(e)
+        return render_template("error.html",error= message)
     ''' 
    EXECUT EACH CERATE QUERY ONR BY ON USING 
     # CUSTOMER TABLE 
@@ -157,9 +153,9 @@ def register_new_broker():
         conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS,
                             host=DB_HOST, port=DB_PORT)
         cur = conn.cursor()
-        query_insert="""insert into borker (b_id,b_NAME,MOBILE_NO,EMAIL_ID,PASSWORD,ADDRESS)
-                values(%s,%s,%s,%s,%s,%s)  """
-        record_to_insert = (50001,f1,mobile,email,password,address)
+        query_insert="""insert into borker (b_NAME,MOBILE_NO,EMAIL_ID,PASSWORD,ADDRESS)
+                values(%s,%s,%s,%s,%s)  """
+        record_to_insert = (f1,mobile,email,password,address)
         cur.execute(query_insert, record_to_insert)                     
         # print("record store successfully")       
     except Exception as e:
@@ -168,8 +164,21 @@ def register_new_broker():
     finally :
          conn.commit()
          count = cur.rowcount
-         conn.close()
-
-    
+         conn.close()    
     return render_template("login_broker.html")
 
+#---------------------------------------------------------------------------------------
+@app.route("/log_out")
+def logout():
+    session["name"] = None
+    session["c_id"] = None
+    
+    return redirect("/")
+#----------------------------------------------------------------------------------------
+@app.route("/delete/<string:id>",methods=['POST','GET'])
+def delete_student(id):
+    db.delete(id)
+    return redirect("/customer_dashboard.html")
+
+if __name__ == "__main__":
+    app.run(debug=False)

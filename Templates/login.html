@@ -5,6 +5,11 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        p{
+            font-size: 30px;
+        }
+    </style>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/login.css') }}">
  </head>
 
@@ -21,7 +26,7 @@
             </nav>
         </div>
            {% if alart == 'y' %}
-               <p style="color: red"> you have enter wrong id  password</p>
+              <center> <p style="color: red"> you have enter wrong id  password</p> </center>
             {% endif %}
           <div class="form-box">
                 <div class='button-box'>
