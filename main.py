@@ -135,6 +135,45 @@ def login_customer():
    EXECUT EACH CERATE QUERY ONR BY ON USING 
     # CUSTOMER TABLE 
    '''
+#--------------------------------------------------------------------------------
+       #broker loging 
+@app.route("/login_broker" , methods=["POST"])
+def login_broker():
+    email = request.form.get("email")
+    password= request.form.get("password")
+    email = email.replace("'","")
+    email = email.lower()
+    password = password.replace(";","")
+    try:
+        records,count =db.login_bro(email,password)  
+        print ("login successful no error in that route loging broker") 
+        flag = 'no'
+        if count != 1:
+            flag = 'y'
+            print ("count==",count,email,'   ',password)
+            return render_template("login_broker.html",alart = flag)
+        # print("record store successfully")       
+    
+        #maessage= "there is an problem "+ str(e)            try to remove problems 
+       #SSSS return   maessage
+    
+         #conn.close()
+       # ''' retriving user infomation  '''
+        id = 0
+        for record in records:
+            id = record[0] 
+            print(id)
+            name= record[1]
+            mobile = record[2]
+            email = record[3]
+        session["c_id"] = id
+        session["name"] = name
+        results = db.find_appointment(str(id))
+        print ("find_appointment  successful no error in that broker")
+        return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
+    except Exception as e:
+        message= str(e)
+        return render_template("error.html",error= message)
 
 ''' registertion for new user '''
 @app.route("/register_broker" ,methods=["POST"])
@@ -176,8 +215,8 @@ def logout():
     return redirect("/")
 #----------------------------------------------------------------------------------------
 @app.route("/delete/<string:id>",methods=['POST','GET'])
-def delete_student(id):
-    db.delete(id)
+def delete_app(id):
+    db.delete_appointments(id)
     return redirect("/customer_dashboard.html")
 
 if __name__ == "__main__":

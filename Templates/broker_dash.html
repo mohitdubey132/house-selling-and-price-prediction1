@@ -31,10 +31,12 @@
         text-shadow: 20em;
         
       }
+      form{
+      }
     </style>
 </head>
 <body>
-  <h1 class="head"><center>Customer Dash Board</center> </h1>
+  <h1 class="head"><center>Broker Dash Board</center> </h1>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home Page</a>
@@ -86,67 +88,19 @@
                 </tr>
             {% endfor %}
         </table> 
-        <table class="table">
-            <thead class="table-light">
-              ...
-            </thead>
-            <tbody>
-              ...
-            </tbody>
-          </table>
-
+        <fieldset border="1">
+          <h2>Add Property</h2>
+            <form action="/add_proprtry" method="post">
+                <input type="text" placeholder="address" name="address"><br>
+                <input type="text" placeholder="bhk" name="bhk"><br>
+                <input type="text" placeholder="price" name="price"><br>
+                <input type="text" placeholder="balcony" name = "balconny"> <br>
+                <input type="text" placeholder="total sqft" name="sqft"><br>
+                <input type="submit" value="add add_proprtry"><br>
+            </form>
+        </fieldset>
     </section>
     <hr>
-    <section>
-        saved property
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-             </div>
-             <div class="card-body">
-             <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-            
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-    </section>
+  
 </body>
 </html>

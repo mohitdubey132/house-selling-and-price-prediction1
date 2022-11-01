@@ -35,7 +35,10 @@
 .card.img {
   border-radius: 50px 50px 0 0;
 }
-
+.prop{
+    flex-direction: column;
+    align-items: flex-start;
+}
 .container {
   padding: 2px 16px;
 }
@@ -64,11 +67,12 @@
     </nav>
 
      {% if session.name %}
-    You are Register {{ session.name }} <a href="/logout">logout</a>.
+    You are Register {{ session.name }} <a href="/log_out">logout</a>.
  {% else %}
     You are not Register. <div class="icons">
         <div id="menu-bars" class="fas fa-bars"></div>
         <a href="/login" class="fas fa-user"></a>
+        
     </div>.
  {% endif %}
 
@@ -108,19 +112,75 @@
         <input type="submit" value="search" class="btn">
 
     </form><hr>
-    <div class="card">
-        <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
-        <div class="container">
-          <h4><b>Broker name </b></h4> 
-          <p>Address :Jabalpur 48200sdssdc scdc c </p> 
-          <h4>area: 18000sqft</h4>
-          <h4>price: 4000000</h4>
-
-        </div>
-      </div>
-
+    
 </section>
+<div class="prop">
+        <div class="card">
+            <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
+            <div class="container">
+            <h4><b>Broker name </b></h4> 
+            <p>Address :Jabalpur 48200sdssdc scdc c </p> 
+            <h4>area: 18000sqft</h4>
+            <h4>price: 4000000</h4>
 
+            </div>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
+            <div class="container">
+            <h4><b>Broker name </b></h4> 
+            <p>Address :Jabalpur 48200sdssdc scdc c </p> 
+            <h4>area: 18000sqft</h4>
+            <h4>price: 4000000</h4>
+
+            </div>
+        </div><div class="card">
+            <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
+            <div class="container">
+            <h4><b>Broker name </b></h4> 
+            <p>Address :Jabalpur 48200sdssdc scdc c </p> 
+            <h4>area: 18000sqft</h4>
+            <h4>price: 4000000</h4>
+
+            </div>
+        </div><div class="card">
+            <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
+            <div class="container">
+            <h4><b>Broker name </b></h4> 
+            <p>Address :Jabalpur 48200sdssdc scdc c </p> 
+            <h4>area: 18000sqft</h4>
+            <h4>price: 4000000</h4>
+
+            </div>
+        </div><div class="card">
+            <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
+            <div class="container">
+            <h4><b>Broker name </b></h4> 
+            <p>Address :Jabalpur 48200sdssdc scdc c </p> 
+            <h4>area: 18000sqft</h4>
+            <h4>price: 4000000</h4>
+
+            </div>
+        </div><div class="card">
+            <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
+            <div class="container">
+            <h4><b>Broker name </b></h4> 
+            <p>Address :Jabalpur 48200sdssdc scdc c </p> 
+            <h4>area: 18000sqft</h4>
+            <h4>price: 4000000</h4>
+
+            </div>
+        </div><div class="card">
+            <img src="{{ url_for('static',filename='bulite_in/house2.jpeg') }}" alt="" style="width:100%">
+            <div class="container">
+            <h4><b>Broker name </b></h4> 
+            <p>Address :Jabalpur 48200sdssdc scdc c </p> 
+            <h4>area: 18000sqft</h4>
+            <h4>price: 4000000</h4>
+
+            </div>
+        </div>
+</div>
 <!-- home section ends -->
 
 <!-- services section starts  -->

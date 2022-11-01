@@ -44,6 +44,21 @@ def login(email,password):
          conn.commit()
          count= cur.rowcount
          conn.close()
+#--------------------------#------------------------$------------------------------#
+def login_bro(email,password):
+      try: 
+         email,password=email,password
+         cur,conn = connect_db()
+         query_To_login="select * from borker where email_id = %s and password =%s "
+         cur.execute(query_To_login,(email,password,))
+         records = cur.fetchall()
+         count = cur.rowcount
+         return records,count 
+      finally:
+         conn.commit()
+         count= cur.rowcount
+         conn.close()
+
 #----------------------------------------------------------------------------------#
          #appointment method  
 def find_appointment(id):
@@ -75,7 +90,7 @@ def delete_appointments(id):
                            """
       cur.execute(delete_appointment,(id,))
       message = "recorde deleted successfully"
-      return 
+      return maessage
    except Exception as e:
                maessage= "there is an problem "+ str(e)
                return   maessage

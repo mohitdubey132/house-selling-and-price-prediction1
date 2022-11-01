@@ -415,3 +415,7 @@ header .icons #menu-bars{
     }
 
 }
+
+.prop{
+    align-items: flex-end;
+}
