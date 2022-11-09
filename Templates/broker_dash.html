@@ -31,7 +31,12 @@
         text-shadow: 20em;
         
       }
-      form{
+      fieldset{
+        background-color: rgb(17, 18, 19);
+        opacity: 0.9;
+        text-align: left;
+        font-family: 'Times New Roman', Times, serif;
+        color: rgb(86, 240, 81);
       }
     </style>
 </head>
@@ -89,14 +94,25 @@
             {% endfor %}
         </table> 
         <fieldset border="1">
-          <h2>Add Property</h2>
+          <center><h1>Add Property</h1>
             <form action="/add_proprtry" method="post">
+                <label for="">Address</label>
                 <input type="text" placeholder="address" name="address"><br>
+                <label for="">BHK</label>
                 <input type="text" placeholder="bhk" name="bhk"><br>
-                <input type="text" placeholder="price" name="price"><br>
-                <input type="text" placeholder="balcony" name = "balconny"> <br>
+                <Label>Total SQFT</Label>
                 <input type="text" placeholder="total sqft" name="sqft"><br>
-                <input type="submit" value="add add_proprtry"><br>
+                <Label>balconny</Label>
+                <input type="text" placeholder="balcony" name = "balconny"> <br>
+                <label for="">Bath room </label>
+                <input type="text" placeholder="bath room " name="bath"><br>
+                <label for="date">available from</label>
+                <input type="date" name="date"><br>
+                <input type="text" placeholder="price" name="price"><br>
+                
+                <input type="submit" class="btn btn-outline-success btn-lg" value="add add_proprtry">
+                <input type="reset" class="btn btn-outline-danger btn-lg" value="reset add_proprtry"><br>
+              </center>
             </form>
         </fieldset>
     </section>
