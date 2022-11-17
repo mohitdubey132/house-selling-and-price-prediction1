@@ -81,6 +81,29 @@ def find_appointment(id):
    finally:
       conn.commit()
       conn.close()
+
+#----------------------------------------------------------------------------------#
+         #appointment method for brokers  
+def find_appointment_brokers(id):
+   try: 
+         id=id 
+         cur,conn = connect_db()
+         print('@1',id)
+         appointment ="""select a.a_date , c.c_name, c.mobile_no, p.address from appointment a inner join customer c 
+                                       on a.b_id=c.c_id 
+                                       inner join property p
+                                       on a.p_id= p.p_id
+                                       where a.c_id = %s
+                                       """
+         print("id value # importants  ",id)
+         cur.execute(appointment,(id,))
+         print('@2')
+         results = cur.fetchall()
+         return results
+
+   finally:
+      conn.commit()
+      conn.close()
 #-----------------------------------------------------------------------------------#
         #delete appointments 
 def delete_appointments(id):

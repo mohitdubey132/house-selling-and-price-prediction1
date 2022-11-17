@@ -1,9 +1,11 @@
-from flask import Flask ,render_template, request, session, redirect
+from flask import Flask ,render_template, request, session, redirect,jsonify
+from flask_cors import cross_origin
 from flask_session import Session
 import smtplib
 import random
 import psycopg2
 import db
+import BangalorePricePrediction as tm
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -168,7 +170,7 @@ def login_broker():
             email = record[3]
         session["c_id"] = id
         session["name"] = name
-        results = db.find_appointment(str(id))
+        results = db.find_appointment_brokers(str(id))
         print ("find_appointment  successful no error in that broker")
         return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
     except Exception as e:
@@ -207,6 +209,7 @@ def register_new_broker():
     return render_template("login_broker.html")
 
 #---------------------------------------------------------------------------------------
+    #logout user
 @app.route("/log_out")
 def logout():
     session["name"] = None
@@ -214,10 +217,73 @@ def logout():
     
     return redirect("/")
 #----------------------------------------------------------------------------------------
+    #delete  appointment  
 @app.route("/delete/<string:id>",methods=['POST','GET'])
 def delete_app(id):
     db.delete_appointments(id)
     return redirect("/customer_dashboard.html")
+#---------------------------------------------------------------------------------------
+    #reschedule
+@app.route("/reschedule/<string:id> ",methods=['POST','GET'])
+def reschedule_app(id):
+    #if db.reschedule_appointments(id):
+    pass
+    return redirect("/index.html")   
+#--------------------------------------------------------------------------------------
+   #  here start the data science part
 
+@app.route("/pridict_home")
+def home_pridict():
+    return ("/home.html")
+
+@app.route('/get_location_names', methods=['GET'])
+def get_location_names():
+    response = jsonify({
+        'locations': tm.get_location_names()
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@app.route('/get_area_names', methods=['GET'])
+def get_area_names():
+    response = jsonify({
+        'area': tm.get_area_values()
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+@app.route('/get_availability_names', methods=['GET'])
+def get_availability_names():
+    response = jsonify({
+        'availability': tm.get_availability_values()
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+@app.route("/pridict_home1")
+@cross_origin()
+def home1():
+    return render_template("home.html")
+
+
+@app.route("/predict", methods=["GET", "POST"])
+#@cross_origin()
+def predict():
+    if request.method == "POST":
+        sqft = float(request.form['sqft'])
+        bhk = int(request.form['bhk'])
+        bath = int(request.form['bath'])
+        loc = request.form.get('loc')
+        area = request.form.get('area')
+        availability = request.form.get('avail')
+
+        prediction = round(float(tm.predict_house_price(loc, area, availability, sqft, bhk, bath)), 2)
+
+        return render_template('home.html', prediction_text="The house price is Rs. {} lakhs".format(prediction))
+
+    return render_template("home.html")
+
+   #
 if __name__ == "__main__":
     app.run(debug=False)
