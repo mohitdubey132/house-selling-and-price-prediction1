@@ -60,6 +60,22 @@ def login_bro(email,password):
          conn.close()
 
 #----------------------------------------------------------------------------------#
+#--------------------------#------------------------$------------------------------#
+def login_broker_2(user_id):
+      try: 
+         user_id = user_id
+         cur,conn = connect_db()
+         query_To_login="select * from borker where b_id = %s"
+         cur.execute(query_To_login,(user_id,))
+         records = cur.fetchall()
+         count = cur.rowcount
+         return records,count 
+      finally:
+         conn.commit()
+         count= cur.rowcount
+         conn.close()
+
+#----------------------------------------------------------------------------------#
          #appointment method  
 def find_appointment(id):
    try: 
@@ -126,9 +142,9 @@ def add_proprtry(Sqft,Bhk,Address,Balcony,Bath,Date,Price,Area_type,Broker_id) :
    try:
       cur,conn = connect_db()
       print("add property step1")
-      query_insert="""insert into PROPERTY (P_ID,TOTAL_SQFT,PRICE,AREA ,ADDRESS ,SIZE,BALCONY,AVAILABILITY,BATH ,B_ID )
-                              values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)  """
-      record_to_insert = ('900',Sqft,Price,Area_type,Address,Bhk,Balcony,Date,Bath,Broker_id)
+      query_insert="""insert into PROPERTY (TOTAL_SQFT,PRICE,AREA ,ADDRESS ,SIZE,BALCONY,AVAILABILITY,BATH ,B_ID )
+                              values(%s,%s,%s,%s,%s,%s,%s,%s,%s)  """
+      record_to_insert = (Sqft,Price,Area_type,Address,Bhk,Balcony,Date,Bath,Broker_id)
       print(Sqft,Price,Area_type,Address,Bhk,Balcony,Date,Bath,Broker_id)
       cur.execute(query_insert, record_to_insert)  
       print("property added i did it")                   

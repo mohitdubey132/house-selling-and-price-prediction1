@@ -8,7 +8,7 @@ import db
 import BangalorePricePrediction as tm
 import os 
 from werkzeug.utils import secure_filename   
-UPLOAD_FOLDER ='d://modules//static//upload_home'
+UPLOAD_FOLDER ='D:\\modules\\static\\uploads_home'
 ALLOWED_EXTENSIONS= {'jpg','jpeg'}
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -177,6 +177,7 @@ def login_broker():
         session["c_id"] = id
         print(session["c_id"],"by login ")
         session["name"] = name
+        session['email'] = email
         results = db.find_appointment_brokers(str(id))
         print ("find_appointment  successful no error in that broker")
         return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
@@ -276,7 +277,7 @@ def add_proprtrys():
             return render_template("error.html",error= message)   
        except:
         print("not working")
-    return redirect("/")
+    return redirect("/login_broker_2")
 #--------------------------------------------------------------------------------------
    #  here start the data science part
 
@@ -356,11 +357,53 @@ def upload_file():
             print("error point 2")
             return redirect('/broker_dash.html') 
         if file and allowed_file(file.filename):
-             filename = secure_filename(file.filename) 
-             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) 
+             filename = secure_filename(file.filename)+"rama" 
+             print(type(file.filename))
+             print(filename)
+             print("error in saving of image")
+             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename)) 
              print("error point 3")
              return redirect(url_for('uploaded_file', filename=filename)) 
      return   """<!doctype html> <title>Upload new File</title> <h1>Upload new File</h1> <form method=post enctype=multipart/form-data> <input type=file > <input type=submit value=Upload> </form>  """          
+#-----------------------------------------------------------------------------------------------------------#
+     # redirect urls
+@app.route("/login_broker_2" )
+def login_broker_2():
+    if "c_id" in session:
+        user_id = session["c_id"]
+    else:
+        return render_template("login_broker.html")
+    
+    try:
+        records,count =db.login_broker_2(user_id)  
+        print ("login successful no error in that route loging broker") 
+        flag = 'no'
+        if count != 1:
+            flag = 'y'
+            print ("count==",count,email,'   ',password)
+            return render_template("login_broker.html",alart = flag)
+        # print("record store successfully")       
+    
+        #maessage= "there is an problem "+ str(e)            try to remove problems 
+       #SSSS return   maessage
+    
+         #conn.close()
+       # ''' retriving user infomation  '''
+        id = 0
+        for record in records:
+            id = record[0] 
+            print(id)
+            name= record[1]
+            mobile = record[2]
+            email = record[3]
+        results = db.find_appointment_brokers(str(id))    
+        print ("find_appointment  successful no error in that broker")
+        return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
+    except Exception as e:
+        message= str(e)
+        return render_template("error.html",error= message)
+
+#-----------------------------------------------------------------------------------------------------------#
 if __name__ == "__main__":
     app.run(debug=False)
 #allowed_file(filename): return '.' in filename and \ filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS @app.route('/', methods=['GET', 'POST']) def upload_file(): if request.method == 'POST': # check if the post request has the file part if 'file' not in request.files: flash('No file part') return redirect(request.url) file = request.files['file'] # if user does not select file, browser also # submit an empty part without filename if file.filename == '': flash('No selected file') return redirect(request.url) if file and allowed_file(file.filename): filename = secure_filename(file.filename) file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) return redirect(url_for('uploaded_file', filename=filename)) return ''' <!doctype html> <title>Upload new File</title> <h1>Upload new File</h1> <form method=post enctype=multipart/form-data> <input type=file name=file> <input type=submit value=Upload> </form> '''

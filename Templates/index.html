@@ -44,6 +44,7 @@
 .container {
   padding: 2px 16px;
 }
+
     </style>
 
 </head>
@@ -118,8 +119,9 @@
 </section>
 <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <img src="{{ url_for('static',filename='uploads_home/mohitofpic.jpg')}}" alt="" height="50px">
+      <h2 class="card-title">Address :{row[0]}} </h2>
+      <h6 class="card-subtitle mb-2 text-muted">Area :{row[1]}} size :{row[2]}} </h6>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>
@@ -233,7 +235,54 @@
 </section>
 
 <!-- contact section ends -->
+<!-- trying cards for homes>
+<div class="cards">
+  <article class="card">
+      <header>
+          <h2>A short heading</h2>
+      </header>    
+      <img src="balloons.jpg" alt="Hot air balloons">
+      <div class="content">
+          <p> The idea of reaching the North Pole by means of balloons appears to have been entertained many years ago. </p>
+      </div>
+          
+  </article>
+          
+   <article class="card">
+      <header>
+          <h2>A short heading</h2>
+      </header>    
+      <img src="balloons2.jpg" alt="Hot air balloons">
+      <div class="content">
+          <p>Short content.</p>
+      </div>
+      <footer>I have a footer!</footer>
+  </article>
+          
+  <article class="card">
+      <header>
+          <h2>A longer heading in this card</h2>
+      </header>
+      <img src="balloons.jpg" alt="Hot air balloons">
+      <div class="content">
+          <p>In a curious work, published in Paris in 1863 by Delaville Dedreux, there is a
+              suggestion for reaching the North Pole by an aerostat.</p>
+      </div>
+      <footer>I have a footer!</footer>
+  </article>
+  <article class="card">
+      <header>
+          <h2>A short heading</h2>
+      </header>
+      <img src="balloons2.jpg" alt="Hot air balloons">
+      <div class="content">
+          <p> The idea of reaching the North Pole by means of balloons appears to have been entertained many
+              years ago. </p>
+      </div>
 
+  </article>
+</div>
+cards end here-->
 <!-- footer section starts  -->
 
 <section class="footer">
