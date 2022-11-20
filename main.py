@@ -42,7 +42,8 @@ conn.close()
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    Property =db.get_property()
+    return render_template("index.html" ,propertys= Property ) 
 @app.route("/pass" ,methods=["POST"])
 def start():
     num = random.random()
@@ -237,6 +238,14 @@ def reschedule_app(id):
     #if db.reschedule_appointments(id):
     pass
     return redirect("/index.html")   
+#--------------------------------------------------------------------------------------
+   # Book_appointment 
+@app.route("/book_appointment/<int:p_id> ",methods=['POST','GET'])
+def book_appointment_customer(p_id):
+    print(pid)
+    #print(b_id)
+   # print(c_id)
+    return 1
 #--------------------------------------------------------------------------------------
 @app.route("/add_proprtry",methods=['POST'])
 def add_proprtrys():

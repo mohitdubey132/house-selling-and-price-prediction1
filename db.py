@@ -28,6 +28,20 @@ def create_customers(f1,mobile,email,password):
                   conn.commit()
                   count = cur.rowcount
                   conn.close()
+#----------------------------------------------------------------------------------#
+     # get propertys
+def get_property():
+   try:
+      cur,conn =connect_db()
+      query_To_get_property="select * from property"
+      cur.execute(query_To_get_property)
+      records = cur.fetchall()
+      count = cur.rowcount
+      return records 
+   finally:
+      conn.commit()
+      count= cur.rowcount
+      conn.close()
 
 
 # --------------------------------------------------------------------------------#

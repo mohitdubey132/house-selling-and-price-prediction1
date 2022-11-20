@@ -92,7 +92,12 @@
 
         <div class="inputBox">
             
-            <input type="search" name="City" placeholder="City" id="">
+            <select name="Area_type" id="">
+                <option value="Built-up Area">Built-up Area</option>
+                <option value="Carpet Area"> Carpet area</option>
+                <option value="Plot Area"> Plot Area</option>
+                <option value="Super built-up Area"> Super built-up Area</option>
+            </select>
             <input type="search" name="Price" placeholder="Maximum Price" id="">
 
             <select name="Balcony" id="">
@@ -117,51 +122,26 @@
     </form><hr>
     
 </section>
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <img src="{{ url_for('static',filename='uploads_home/mohitofpic.jpg')}}" alt="" height="50px">
-      <h2 class="card-title">Address :{row[0]}} </h2>
-      <h6 class="card-subtitle mb-2 text-muted">Area :{row[1]}} size :{row[2]}} </h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div><div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div><div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div class="row">
+    {% for row in propertys: %}
+        <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+            <h2 class="card-title">Area : {{row[3]}}</h2><br>
+            <h2>Address :{{row[4]}} </h2><br>
+            <h3>total Sqft : {{row[1]}}</h3>
+            <h2>Price :{{row[2]}} </h2>
+            <h3>size: {{row[5]}} BHK 
+                Balany:{{row[6] }} <br>
+                availability :{{row[8]}}
+
+            </h3>
+            <p class="card-text">This all information provided by oure Brokers so in case of any miss-infomation company is not noticable </p>
+            <a href="/book_appointment/{{row[0]}} " class="btn btn-primary">Book your Appointment </a>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
-      </div>
-    </div>
+    {% endfor %}    
   </div>
 <section class="services" id="services">
 
