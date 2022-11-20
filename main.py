@@ -1,4 +1,4 @@
-from flask import Flask ,render_template, request, session, redirect,jsonify
+from flask import Flask ,render_template, request, session, redirect,jsonify,flash
 from flask_cors import cross_origin
 from flask_session import Session
 import smtplib
@@ -6,9 +6,14 @@ import random
 import psycopg2
 import db
 import BangalorePricePrediction as tm
+import os 
+from werkzeug.utils import secure_filename   
+UPLOAD_FOLDER ='d://modules//static//upload_home'
+ALLOWED_EXTENSIONS= {'jpg','jpeg'}
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 Session(app)
  
 #  add email
@@ -128,6 +133,7 @@ def login_customer():
         session["c_id"] = id
         session["name"] = name
         results = db.find_appointment(str(id))
+        print(results)
         print ("find_appointment  successful no error in that")
         return render_template("customer_dashboard.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
     except Exception as e:
@@ -169,6 +175,7 @@ def login_broker():
             mobile = record[2]
             email = record[3]
         session["c_id"] = id
+        print(session["c_id"],"by login ")
         session["name"] = name
         results = db.find_appointment_brokers(str(id))
         print ("find_appointment  successful no error in that broker")
@@ -221,7 +228,7 @@ def logout():
 @app.route("/delete/<string:id>",methods=['POST','GET'])
 def delete_app(id):
     db.delete_appointments(id)
-    return redirect("/customer_dashboard.html")
+    return redirect("/login_customer")
 #---------------------------------------------------------------------------------------
     #reschedule
 @app.route("/reschedule/<string:id> ",methods=['POST','GET'])
@@ -229,6 +236,47 @@ def reschedule_app(id):
     #if db.reschedule_appointments(id):
     pass
     return redirect("/index.html")   
+#--------------------------------------------------------------------------------------
+@app.route("/add_proprtry",methods=['POST'])
+def add_proprtrys():
+    if request.method=="POST":
+       print('add propety link working')
+       try:
+            print(session["c_id"],"by login  again")
+            #print(type(session["C_id"]))
+            if "c_id" in session:
+                user_id = session["c_id"]
+                print(user_id,"session access susseefully")
+
+            Sqft = float(request.form.get('sqft'))
+            print(Sqft)
+            Bhk=   int(request.form.get('bhk'))
+            print(Bhk)
+            Address = str(request.form.get('address'))
+            print(Address)
+            Balcony = int(request.form.get('balconny'))
+            print(Balcony)
+            Bath = int(request.form.get('bath'))
+            print(Bath)
+            Date = str(request.form.get('date'))
+            print(Date)
+            Price= float(request.form.get('price'))
+            print(Price)
+            Area_type=str(request.form.get('area_type'))
+            print(Area_type)
+            if (Sqft or Bhk or Address or Balcony or Bath or Date or Price or user_id)== None:
+                    return render_template("login_dash.html")
+            else:
+                print("all parameters have vales")
+            try:
+                db.add_proprtry(Sqft,Bhk,Address,Balcony,Bath,Date,Price,Area_type,user_id)  
+            except Exception as e:
+                message= str(e)
+                print("message",maessage)
+            return render_template("error.html",error= message)   
+       except:
+        print("not working")
+    return redirect("/")
 #--------------------------------------------------------------------------------------
    #  here start the data science part
 
@@ -285,5 +333,34 @@ def predict():
     return render_template("home.html")
 
    #
+def allowed_file(filename):
+     return '.' in filename and \
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+@app.route('/upload_image', methods=['GET', 'POST']) 
+def upload_file():
+     if request.method == 'POST': 
+        # check if the post request has the file part
+        print(type(request.files)) 
+        if (request.files== None):
+            print("nono nothing here")
+
+        if 'file1' not in request.files: 
+            #flash('No file part')
+            print("error point 1") 
+            return  "there is no files" 
+        file = request.files['file1'] 
+        # if user does not select file, browser also 
+        # submit an empty part without filename 
+        if file.filename == '': 
+            flash('No selected file')
+            print("error point 2")
+            return redirect('/broker_dash.html') 
+        if file and allowed_file(file.filename):
+             filename = secure_filename(file.filename) 
+             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) 
+             print("error point 3")
+             return redirect(url_for('uploaded_file', filename=filename)) 
+     return   """<!doctype html> <title>Upload new File</title> <h1>Upload new File</h1> <form method=post enctype=multipart/form-data> <input type=file > <input type=submit value=Upload> </form>  """          
 if __name__ == "__main__":
     app.run(debug=False)
+#allowed_file(filename): return '.' in filename and \ filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS @app.route('/', methods=['GET', 'POST']) def upload_file(): if request.method == 'POST': # check if the post request has the file part if 'file' not in request.files: flash('No file part') return redirect(request.url) file = request.files['file'] # if user does not select file, browser also # submit an empty part without filename if file.filename == '': flash('No selected file') return redirect(request.url) if file and allowed_file(file.filename): filename = secure_filename(file.filename) file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) return redirect(url_for('uploaded_file', filename=filename)) return ''' <!doctype html> <title>Upload new File</title> <h1>Upload new File</h1> <form method=post enctype=multipart/form-data> <input type=file name=file> <input type=submit value=Upload> </form> '''

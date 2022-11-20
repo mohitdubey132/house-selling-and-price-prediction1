@@ -68,6 +68,7 @@
         <h2> Name:  {{c_name}}</h2><br>
         <h3>Email id: {{Email}}</h3>
         <h3>Mobile: {{Mobile}}</h3>
+        <h3>Brokerid:{{session["c_id"]}}</h3>
     </section>
     <hr>
     <section>
@@ -104,10 +105,14 @@
           <center><h1>Add Property</h1>
             <form action="/add_proprtry" method="post">
                 <label for="">Address</label>
-                <input type="text" placeholder="address" name="address"><br>
+                <input type="text" placeholder="address" name="address">
+                <select name="b_id" id="">
+                  <option value="{{session['c_id']}}"> Broker id </option>
+                </select>
                 <label for="">BHK</label>
                 <input type="text" placeholder="bhk" name="bhk"><br>
                 <Label>Total SQFT</Label>
+                <input name="area_type" placeholder="Area type ">
                 <input type="text" placeholder="total sqft" name="sqft"><br>
                 <Label>balconny</Label>
                 <input type="text" placeholder="balcony" name = "balconny"> <br>
@@ -116,10 +121,13 @@
                 <label for="date">available from</label>
                 <input type="date" name="date"><br>
                 <input type="text" placeholder="price" name="price"><br>
-                
                 <input type="submit" class="btn btn-outline-success btn-lg" value="add add_proprtry">
                 <input type="reset" class="btn btn-outline-danger btn-lg" value="reset add_proprtry"><br>
               </center>
+            </form>
+            <form action="/upload_image" method="post" enctype="multipart/form-data">
+              <input type="file" name="file1" id="">
+              <input type="submit" value="submit" class="btn btn-outline-success btn-lg">
             </form>
         </fieldset>
     </section>

@@ -66,7 +66,7 @@ def find_appointment(id):
          id=id 
          cur,conn = connect_db()
          print('@1',id)
-         appointment ="""select a.a_date , b.b_name, b.mobile_no, p.address from appointment a inner join borker b 
+         appointment ="""select a.a_date , b.b_name, b.mobile_no, p.address ,a.app_id from appointment a inner join borker b 
                                        on a.b_id=b.b_id 
                                        inner join property p
                                        on a.p_id= p.p_id
@@ -93,7 +93,7 @@ def find_appointment_brokers(id):
                                        on a.b_id=c.c_id 
                                        inner join property p
                                        on a.p_id= p.p_id
-                                       where a.c_id = %s
+                                       where a.b_id = %s
                                        """
          print("id value # importants  ",id)
          cur.execute(appointment,(id,))
@@ -121,7 +121,27 @@ def delete_appointments(id):
    finally:
       conn.commit()
       conn.close()
-                                 
+#-------------------------------------------------------------------------------------#
+def add_proprtry(Sqft,Bhk,Address,Balcony,Bath,Date,Price,Area_type,Broker_id) :
+   try:
+      cur,conn = connect_db()
+      print("add property step1")
+      query_insert="""insert into PROPERTY (P_ID,TOTAL_SQFT,PRICE,AREA ,ADDRESS ,SIZE,BALCONY,AVAILABILITY,BATH ,B_ID )
+                              values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)  """
+      record_to_insert = ('900',Sqft,Price,Area_type,Address,Bhk,Balcony,Date,Bath,Broker_id)
+      print(Sqft,Price,Area_type,Address,Bhk,Balcony,Date,Bath,Broker_id)
+      cur.execute(query_insert, record_to_insert)  
+      print("property added i did it")                   
+                     # print("record store successfully")       
+   except Exception as e:
+            maessage= "there is an problem "+ str(e)
+            return   maessage
+   finally :
+            conn.commit()
+            count = cur.rowcount
+            conn.close()
+
+
 
 '''
 cur.execute ("""
@@ -167,7 +187,10 @@ ADD CONSTRAINT BORKER_unique UNIQUE ( MOBILE_NO ,EMAIL_ID);
                 B_ID INTEGER REFERENCES BORKER(B_ID) ON DELETE SET NULL,  
              );
             '''
+   #         P_ID SERIAL,TOTAL_SQFT,PRICE,AREA ,ADDRESS ,SIZE,BALCONY,AVAILABILITY,BATH ,B_ID 
 '''server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls()
 server.login('connectusjecmohit132@gmail.com','owjsnkodweasxjcc' )
 '''
+#insert into PROPERTY (P_ID,TOTAL_SQFT,PRICE,AREA ,ADDRESS ,SIZE,BALCONY,AVAILABILITY,BATH ,B_ID )
+ #                             values(1,1000,2000000,'under developed','rampue',3,1,'13-02-2019',1,2)
