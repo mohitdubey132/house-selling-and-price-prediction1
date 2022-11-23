@@ -7,6 +7,7 @@ import psycopg2
 import db
 import BangalorePricePrediction as tm
 import os 
+import datetime
 from werkzeug.utils import secure_filename   
 UPLOAD_FOLDER ='D:\\modules\\static\\uploads_home'
 ALLOWED_EXTENSIONS= {'jpg','jpeg'}
@@ -240,12 +241,24 @@ def reschedule_app(id):
     return redirect("/index.html")   
 #--------------------------------------------------------------------------------------
    # Book_appointment 
-@app.route("/book_appointment/<int:p_id> ",methods=['POST','GET'])
-def book_appointment_customer(p_id):
-    print(pid)
-    #print(b_id)
-   # print(c_id)
-    return 1
+@app.route("/book_appointment/<string:p_id>/<string:b_id>",methods=['POST','GET'])
+def book_appointment_customer(p_id,b_id):
+    print(p_id,"getting property id",b_id)
+    if "c_id" in session:
+        user_id = session["c_id"]
+    else :
+        return redirect("/login")
+    NextDay_Date = datetime.datetime.today() + datetime.timedelta(days=1)
+    NextDay_Date =NextDay_Date.strftime ('%d-%m-%Y')
+    print (NextDay_Date)
+    try:
+        #db.create_appointment(user_id,b_id,p_id,NextDay_Date)
+        flash('Your appointment is booked ')
+        return redirect(url_for('/'))
+    except :
+        Property =db.get_property()
+        return render_template("index.html" ,propertys= Property )
+
 #--------------------------------------------------------------------------------------
 @app.route("/add_proprtry",methods=['POST'])
 def add_proprtrys():

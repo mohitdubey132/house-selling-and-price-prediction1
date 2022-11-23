@@ -81,6 +81,15 @@
 
 </header>
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <!-- header section ends -->
 
 <!-- home section starts  -->
@@ -137,7 +146,7 @@
 
             </h3>
             <p class="card-text">This all information provided by oure Brokers so in case of any miss-infomation company is not noticable </p>
-            <a href="/book_appointment/{{row[0]}} " class="btn btn-primary">Book your Appointment </a>
+            <a href="/book_appointment/{{row[0]}}/{{row[9]}} " class="btn btn-primary">Book your Appointment </a>
             </div>
         </div>
         </div>
