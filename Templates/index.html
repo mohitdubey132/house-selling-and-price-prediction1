@@ -44,7 +44,15 @@
 .container {
   padding: 2px 16px;
 }
-
+.products{
+    background: var(--alice-blue);
+    padding: 3.2rem 0;
+}
+.products .text-light{
+    text-align: center;
+    width: 70%;
+    margin: 0.9rem auto;
+}
     </style>
 
 </head>
@@ -70,7 +78,9 @@
     </nav>
 
      {% if session.name %}
-    You are Register {{ session.name }} <a href="/log_out">logout</a>.
+    You are Register {{ session.name }}
+    <div class="icons">
+        <div id="menu-bars" class="fas fa-bars"></div></div> <a href="/log_out">logout</a>.
  {% else %}
     You are not Register. <div class="icons">
         <div id="menu-bars" class="fas fa-bars"></div>
@@ -81,22 +91,14 @@
 
 </header>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+
 <!-- header section ends -->
 
 <!-- home section starts  -->
 
 <section class="home" id="home">
 
-    <form action = "/se" , method="POST">
+    <form action = "/search" , method="POST">
         <h3>find your perfect home</h3>
 
         <div class="inputBox">
@@ -111,8 +113,9 @@
 
             <select name="Balcony" id="">
                 <option value="" disabled hidden selected>Balcony</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
                 
             </select>
             
@@ -127,11 +130,25 @@
            
         </div>
         <input type="submit" value="search" class="btn">
-
+        {% if propertys %}   
+        <p><h2>found search resultes are </h2></p> 
+       {% else %}
+         <p><h2>No search resulte foundes</h2></p>
+       {%endif %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <h1><li>{{ message }}</li></h1>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
     </form><hr>
     
 </section>
       <div class="row">
+     
     {% for row in propertys: %}
         <div class="col-sm-6">
         <div class="card">
@@ -150,7 +167,9 @@
             </div>
         </div>
         </div>
-    {% endfor %}    
+    {% endfor %}        <div class = "product-items">
+        
+        </div>
   </div>
 <section class="services" id="services">
 

@@ -42,7 +42,18 @@ def get_property():
       conn.commit()
       count= cur.rowcount
       conn.close()
-
+def get_property_2(Area_type,Price,Balcony,BHK):
+   try:
+      cur,conn =connect_db()
+      query_To_get_property="select * from property where AREA =%s and PRICE<=%s and BALCONY =%s and SIZE =%s"
+      cur.execute(query_To_get_property,(Area_type,Price,Balcony,BHK,))
+      records = cur.fetchall()
+      count = cur.rowcount
+      return records 
+   finally:
+      conn.commit()
+      count= cur.rowcount
+      conn.close()
 
 # --------------------------------------------------------------------------------#
 def login(email,password):
@@ -88,7 +99,19 @@ def login_broker_2(user_id):
          conn.commit()
          count= cur.rowcount
          conn.close()
-
+def login_customer_2(user_id):
+      try: 
+         user_id = user_id
+         cur,conn = connect_db()
+         query_To_login="select * from customer where c_id = %s"
+         cur.execute(query_To_login,(user_id,))
+         records = cur.fetchall()
+         count = cur.rowcount
+         return records,count 
+      finally:
+         conn.commit()
+         count= cur.rowcount
+         conn.close()
 #----------------------------------------------------------------------------------#
          #appointment method  
 def find_appointment(id):
@@ -167,6 +190,27 @@ def add_proprtry(Sqft,Bhk,Address,Balcony,Bath,Date,Price,Area_type,Broker_id) :
             maessage= "there is an problem "+ str(e)
             return   maessage
    finally :
+            conn.commit()
+            count = cur.rowcount
+            conn.close()
+
+#---------------------------------------------------------------------#
+ # create_appointment(user_id,b_id,p_id,NextDay_Date)
+def create_appointment(user_id,b_id,p_id,NextDay_Date):
+    try:
+      cur,conn = connect_db()
+      print("add property step1")
+      query_insert="""insert into appointment (c_id,b_id,p_id,a_date)
+                              values(%s,%s,%s,%s)  """
+      record_to_insert = (user_id,b_id,p_id,NextDay_Date)
+      print(user_id,b_id,p_id,NextDay_Date)
+      cur.execute(query_insert, record_to_insert)  
+      print("Appointments  added i did it")                   
+                     # print("record store successfully")       
+    except Exception as e:
+            maessage= "there is an problem "+ str(e)
+            return   maessage
+    finally :
             conn.commit()
             count = cur.rowcount
             conn.close()

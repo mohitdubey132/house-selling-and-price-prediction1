@@ -79,15 +79,8 @@
                 <th>Customer name</th>
                 <th>Customer mobile nu</th>
                 <th>property address</th>
-                <th>status</th>
-            </tr></h2><tr>
-              <td> row[0]}} </td>
-              <td> row[1]}} </td>
-              <td> row[2]}} </td>
-              <td> row[3]}} </td>
-              <td><button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete/id:1">Delete</a></button>
-                <button type="button" class="btn btn-outline-success btn-lg"><a href="/delete/">Edit</a></button></td>
-              </tr>
+                <th>Delete property</th>
+            </tr></h2>
             {% for row in appointments: %}
                 <tr>
                 <td> {{row[0]}} </td>
@@ -95,8 +88,7 @@
                 <td> {{row[2]}} </td>
                 <td> {{row[3]}} </td>
                 <td>
-                    <button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete/{{row[4]}}">Delete</a></button>
-                    <button type="button" class="btn btn-outline-success btn-lg"><a href="/edit/{{row[4]}}">Edit</a></button>
+                    <button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete_appointment_by_broker_row[4]}}">Delete</a></button>
                 </td>
                 </tr>
             {% endfor %}
@@ -109,8 +101,13 @@
                 <label for="">BHK</label>
                 <input type="text" placeholder="bhk" name="bhk"><br>
                 <Label>Total SQFT</Label>
-                <input name="area_type" placeholder="Area type ">
-                <input type="text" placeholder="total sqft" name="sqft"><br>
+                <select name="Area_type" id="">
+                  <option value="Built-up Area">Built-up Area</option>
+                  <option value="Carpet Area"> Carpet area</option>
+                  <option value="Plot Area"> Plot Area</option>
+                  <option value="Super built-up Area"> Super built-up Area</option>
+              </select>
+               <input type="text" placeholder="total sqft" name="sqft"><br>
                 <Label>balconny</Label>
                 <input type="text" placeholder="balcony" name = "balconny"> <br>
                 <label for="">Bath room </label>
@@ -123,6 +120,7 @@
               </center>
             </form>
             <form action="/upload_image" method="post" enctype="multipart/form-data">
+              <label for="image"> UPLOAD IMAGE OF HOUSE</label>
               <input type="file" name="file1" id="">
               <input type="submit" value="submit" class="btn btn-outline-success btn-lg">
             </form>

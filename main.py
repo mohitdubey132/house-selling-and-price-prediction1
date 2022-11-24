@@ -45,6 +45,10 @@ conn.close()
 def index():
     Property =db.get_property()
     return render_template("index.html" ,propertys= Property ) 
+@app.route("/2")
+def index2():
+    Property =db.get_property()
+    return render_template("index.html" ,propertys= Property ) 
 @app.route("/pass" ,methods=["POST"])
 def start():
     num = random.random()
@@ -92,14 +96,17 @@ def register_new():
 
 
 ''' search request  routes '''
-@app.route("/se", methods=["POST"])
+@app.route("/search", methods=["POST"])
 def search():
-    city = request.form.get("City")
+    Area_type = request.form.get("Area_type")
     Price = request.form.get("Price")
     Balcony = request.form.get("Balcony")
     BHK =request.form.get("BHK")
-    print("city",city,"Price",Price)
-    return render_template("Agents.html")
+    print("city","Price",Price)
+
+    Property =db.get_property_2(Area_type,Price,Balcony,BHK)
+    return render_template("index.html" ,propertys= Property )
+    
 
 
 
@@ -231,7 +238,7 @@ def logout():
 @app.route("/delete/<string:id>",methods=['POST','GET'])
 def delete_app(id):
     db.delete_appointments(id)
-    return redirect("/login_customer")
+    return redirect("/login_customer2")
 #---------------------------------------------------------------------------------------
     #reschedule
 @app.route("/reschedule/<string:id> ",methods=['POST','GET'])
@@ -252,9 +259,9 @@ def book_appointment_customer(p_id,b_id):
     NextDay_Date =NextDay_Date.strftime ('%d-%m-%Y')
     print (NextDay_Date)
     try:
-        #db.create_appointment(user_id,b_id,p_id,NextDay_Date)
-        flash('Your appointment is booked ')
-        return redirect(url_for('/'))
+        db.create_appointment(user_id,b_id,p_id,NextDay_Date)
+        flash('Your appointment is booked ',)
+        return redirect(url_for('/2'))
     except :
         Property =db.get_property()
         return render_template("index.html" ,propertys= Property )
@@ -285,7 +292,7 @@ def add_proprtrys():
             print(Date)
             Price= float(request.form.get('price'))
             print(Price)
-            Area_type=str(request.form.get('area_type'))
+            Area_type=str(request.form.get('Area_type'))
             print(Area_type)
             if (Sqft or Bhk or Address or Balcony or Bath or Date or Price or user_id)== None:
                     return render_template("login_dash.html")
@@ -350,7 +357,7 @@ def predict():
         availability = request.form.get('avail')
 
         prediction = round(float(tm.predict_house_price(loc, area, availability, sqft, bhk, bath)), 2)
-
+        prediction /=10
         return render_template('home.html', prediction_text="The house price is Rs. {} lakhs".format(prediction))
 
     return render_template("home.html")
@@ -379,7 +386,9 @@ def upload_file():
             print("error point 2")
             return redirect('/broker_dash.html') 
         if file and allowed_file(file.filename):
-             filename = secure_filename(file.filename)+"rama" 
+             filename = secure_filename(file.filename) 
+             create_filename=filename.split('.')
+
              print(type(file.filename))
              print(filename)
              print("error in saving of image")
@@ -404,13 +413,6 @@ def login_broker_2():
             flag = 'y'
             print ("count==",count,email,'   ',password)
             return render_template("login_broker.html",alart = flag)
-        # print("record store successfully")       
-    
-        #maessage= "there is an problem "+ str(e)            try to remove problems 
-       #SSSS return   maessage
-    
-         #conn.close()
-       # ''' retriving user infomation  '''
         id = 0
         for record in records:
             id = record[0] 
@@ -421,6 +423,35 @@ def login_broker_2():
         results = db.find_appointment_brokers(str(id))    
         print ("find_appointment  successful no error in that broker")
         return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
+    except Exception as e:
+        message= str(e)
+        return render_template("error.html",error= message)
+     #redirect customer2
+@app.route("/login_customer2")
+def login_customer2():
+    if "c_id" in session:
+        user_id = session["c_id"]
+    else:
+        return render_template("login_customer.html")
+    
+    try:
+        records,count =db.login_customer_2(user_id)  
+        print ("login successful no error in that route loging broker") 
+        flag = 'no'
+        if count != 1:
+            flag = 'y'
+            print ("count==",count,email,'   ',password)
+            return render_template("login_customer.html",alart = flag)
+        id = 0
+        for record in records:
+            id = record[0] 
+            print(id)
+            name= record[1]
+            mobile = record[2]
+            email = record[3]
+        results = db.find_appointment(str(user_id))    
+        print ("find_appointment  successful no error in that broker")
+        return render_template("customer_dashboard.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
     except Exception as e:
         message= str(e)
         return render_template("error.html",error= message)
