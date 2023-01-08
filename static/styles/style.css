@@ -116,7 +116,7 @@ header .icons #menu-bars{
 }
 
 .home{
-    min-height: 100vh;
+    min-height: 0vh;
     background:url(/static/bulite_in/pexels-pixabay-302769.jpg) no-repeat; 
     background-size: cover;
     background-position: center;
@@ -207,7 +207,9 @@ header .icons #menu-bars{
 
 
 .contact .icons-container{
-    display: flex;
+    display: inline-flex;
+    position: relative;
+    flex-direction: ;
     flex-wrap: wrap;
     gap:1.5rem;
     padding-bottom: 2rem;
@@ -279,7 +281,7 @@ header .icons #menu-bars{
 }
 
 .contact .row form textarea{
-    width:100%;
+    width:50%;
     height:20rem;
     resize: none;
 }
@@ -288,7 +290,10 @@ header .icons #menu-bars{
 .contact .row form .inputBox input:focus{
     background-color: var(--light-red);
 }
-
+.wrapper {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+  }
 .footer .footer-container{
     background:#fff;
     border:.1rem solid rgba(0,0,0,.2);
