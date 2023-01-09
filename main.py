@@ -55,6 +55,13 @@ def index2():
     Property =db.get_property()
     return render_template("index.html" ,propertys= Property ) 
 @app.route("/pass" ,methods=["POST"])
+#-----------------------------------------------------------------------
+                    #trying new home page
+@app.route("/index2")
+def indexTry1():
+    Property =db.get_property()
+    return render_template("index2.html" ,propertys= Property ) 
+#----------------------------------------------------------------------
 def start():
     num = random.random()
     name =request.form.get("name")
