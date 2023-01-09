@@ -55,8 +55,8 @@
 }
 .dropbtn {
   
-  padding: 26px;
-  font-size: 26px;
+  padding: 6px;
+  font-size: 16px;
   border: none;
   cursor: pointer;
 }
@@ -93,6 +93,18 @@
 
 .show {display: block;}
 
+.continner-properties{
+    width: 1170px;
+    margin: auto;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: in-line;
+    align-items: baseline;
+}
+.products-proprty{
+    flex-basis: 34%;
+    background-color: #eed9d9;
+}
     </style>
 
 </head>
@@ -118,7 +130,7 @@
     </div>
     <i class="fa-regular fa-user"></i>
  <div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">{% if session.name %}
+    <button onclick="myFunction()" class="dropbtn" border-radius="20px">{% if session.name %}
         {{ session.name }}
         {% else %}
         You are not Register.
@@ -127,7 +139,9 @@
     <div id="myDropdown" class="dropdown-content">
       <a href="/login">login_customer</a>
       <a href="/login_2">login_broker</a>
+      <a href="/login_broker_2"> broker deshborad</a>
       <a href="/log_out">logout</a>
+      <a href="/login_customer2">Customer Dashboard</a>
     </div>
   </div>
   
@@ -235,6 +249,10 @@
         
         </div>
   </div>
+  
+</div>
+</div>
+
 <section class="services" id="services">
 
     <h1 class="heading"> our <span>services</span> </h1>

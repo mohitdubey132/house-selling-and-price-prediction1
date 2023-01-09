@@ -60,7 +60,7 @@
           <a class="nav-link" href="/log_out">Log out</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Pridict </a>
+          <a class="nav-link" href="#add_property" >Add property </a>
         </li>
       </ul>
      
@@ -92,22 +92,25 @@
                 </td>                                                                   
                 </tr>
             {% endfor %}
-        </table> 
-        <fieldset border="1">
-          <center><h1>Add Property</h1>
-            <form action="/add_proprtry" method="post">
+        </table> <hr>
+      </section>
+      <section id="add_property" class="add_property">
+        <fieldset border="1" aling="right" >
+          <h1><b>Add Property</b></h1>
+            <form action="/add_proprtry" method="post" >
                 <label for="">Address</label>
-                <input type="text" placeholder="address" name="address">
+                <input type="text" placeholder="address" name="address"><br>
                 <label for="">BHK</label>
                 <input type="text" placeholder="bhk" name="bhk"><br>
                 <Label>Total SQFT</Label>
-                <select name="Area_type" id="">
-                  <option value="Built-up Area">Built-up Area</option>
-                  <option value="Carpet Area"> Carpet area</option>
-                  <option value="Plot Area"> Plot Area</option>
-                  <option value="Super built-up Area"> Super built-up Area</option>
-              </select>
                <input type="text" placeholder="total sqft" name="sqft"><br>
+               
+               <select name="Area_type" id="">
+                <option value="Built-up Area">Built-up Area</option>
+                <option value="Carpet Area"> Carpet area</option>
+                <option value="Plot Area"> Plot Area</option>
+                <option value="Super built-up Area"> Super built-up Area</option>
+            </select><br>
                 <Label>balconny</Label>
                 <input type="text" placeholder="balcony" name = "balconny"> <br>
                 <label for="">Bath room </label>
@@ -117,7 +120,7 @@
                 <input type="text" placeholder="price" name="price"><br>
                 <input type="submit" class="btn btn-outline-success btn-lg" value="add add_proprtry">
                 <input type="reset" class="btn btn-outline-danger btn-lg" value="reset add_proprtry"><br>
-              </center>
+            
             </form>
             <form action="/upload_image" method="post" enctype="multipart/form-data">
               <label for="image"> UPLOAD IMAGE OF HOUSE</label>
