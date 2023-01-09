@@ -1,5 +1,6 @@
 from flask import Flask ,render_template, request, session, redirect,jsonify,flash
 from flask_cors import cross_origin
+from flask_mail import Mail, Message
 from flask_session import Session
 import smtplib
 import random
@@ -15,13 +16,17 @@ app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["MAIL_DEFAULT_SENDER"] = "mohit132@gmail.com"
+app.config["MAIL_PASSWORD"] = "jijgzipowproiikt"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_SERVER"] ="smtp.gmail.com"
 Session(app)
  
 #  add email
-'''server = smtplib.SMTP('smtp.gmail.com',587)
+server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls()
-server.login('connectusjecmohit132@gmail.com','owjsnkodweasxjcc' )
-'''
+server.login('connectusjecmohit132@gmail.com','jijgzipowproiikt' )
+
 DB_NAME = "Ghardekho"
 DB_USER = "postgres"
 DB_PASS = "github@0"
@@ -141,8 +146,10 @@ def login_customer():
             email = record[3]
         session["c_id"] = id
         session["name"] = name
+        session['email']= email
         results = db.find_appointment(str(id))
         print(results)
+        print("email id of ",email)
         print ("find_appointment  successful no error in that")
         return render_template("customer_dashboard.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
     except Exception as e:
@@ -186,9 +193,10 @@ def login_broker():
         session["c_id"] = id
         print(session["c_id"],"by login ")
         session["name"] = name
-        session['email'] = email
+        session["email"] = email
+        print("emil or user is ",email)
         results = db.find_appointment_brokers(str(id))
-        print ("find_appointment  successful no error in that broker")
+        print ("find_appointment  successful no error in that broker",results)
         return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
     except Exception as e:
         message= str(e)
@@ -231,6 +239,8 @@ def register_new_broker():
 def logout():
     session["name"] = None
     session["c_id"] = None
+    session["email"] =None
+    print('logout')
     
     return redirect("/")
 #----------------------------------------------------------------------------------------
@@ -239,6 +249,13 @@ def logout():
 def delete_app(id):
     db.delete_appointments(id)
     return redirect("/login_customer2")
+
+@app.route("/delete_appointment_by_broker/<string:id>", methods=['POST','GET'])    
+def delete_appointment_by_broker(id):
+    ''' broker delete ppointment by app id '''
+    print('delete by broker working')
+    db.delete_appointments(id)
+    return redirect("/login_broker_2")
 #---------------------------------------------------------------------------------------
     #reschedule
 @app.route("/reschedule/<string:id> ",methods=['POST','GET'])
@@ -253,6 +270,8 @@ def book_appointment_customer(p_id,b_id):
     print(p_id,"getting property id",b_id)
     if "c_id" in session:
         user_id = session["c_id"]
+        if user_id == None:
+            return redirect('/login')
     else :
         return redirect("/login")
     NextDay_Date = datetime.datetime.today() + datetime.timedelta(days=1)
@@ -261,6 +280,15 @@ def book_appointment_customer(p_id,b_id):
     try:
         db.create_appointment(user_id,b_id,p_id,NextDay_Date)
         flash('Your appointment is booked ',)
+        if "email" in session:
+            user_email=session["email"]
+            print(user_email,'yjgfygky')
+        print("code is working")
+        message=Message('this is a message genrated'+user_email+' using python youer  one time password is',recipients=user_email)
+        #print(maessage)
+        mail.send(maessage)
+        print("email sends")
+
         return redirect(url_for('/2'))
     except :
         Property =db.get_property()

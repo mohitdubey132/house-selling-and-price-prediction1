@@ -78,15 +78,27 @@
                 </tr>
             {% endfor %}
         </table> 
-        <table class="table">
-            <thead class="table-light">
-              ...
-            </thead>
-            <tbody>
-              ...
-            </tbody>
-          </table>
-
+        <div class="row">
+     
+          {% for row in propertys: %}
+              <div class="col-sm-6">
+              <div class="card">
+                  <div class="card-body">
+                  <h2 class="card-title">Area : {{row[3]}}</h2><br>
+                  <h2>Address :{{row[4]}} </h2><br>
+                  <h3>total Sqft : {{row[1]}}</h3>
+                  <h2>Price :{{row[2]}} </h2>
+                  <h3>size: {{row[5]}} BHK 
+                      Balany:{{row[6] }} <br>
+                      availability :{{row[8]}}
+      
+                  </h3>
+                  <p class="card-text">This all information provided by oure Brokers so in case of any miss-infomation company is not noticable </p>
+                  <a href="/book_appointment/{{row[0]}}/{{row[9]}} " class="btn btn-primary">Book your Appointment </a>
+                  </div>
+              </div>
+              </div>
+          {% endfor %} 
     </section>
     <hr>
     <section>

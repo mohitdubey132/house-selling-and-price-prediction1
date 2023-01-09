@@ -45,7 +45,7 @@ def get_property():
 def get_property_2(Area_type,Price,Balcony,BHK):
    try:
       cur,conn =connect_db()
-      query_To_get_property="select * from property where AREA =%s and PRICE<=%s and BALCONY =%s and SIZE =%s"
+      query_To_get_property="select * from property where AREA <=%s or PRICE<=%s or BALCONY >=%s or SIZE =%s"
       cur.execute(query_To_get_property,(Area_type,Price,Balcony,BHK,))
       records = cur.fetchall()
       count = cur.rowcount
@@ -142,8 +142,8 @@ def find_appointment_brokers(id):
          id=id 
          cur,conn = connect_db()
          print('@1',id)
-         appointment ="""select a.a_date , c.c_name, c.mobile_no, p.address from appointment a inner join customer c 
-                                       on a.b_id=c.c_id 
+         appointment ="""select a.a_date , c.c_name, c.mobile_no, p.address,a.app_id from appointment a inner join customer c 
+                                       on a.c_id=c.c_id 
                                        inner join property p
                                        on a.p_id= p.p_id
                                        where a.b_id = %s

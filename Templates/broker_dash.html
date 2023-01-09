@@ -51,7 +51,7 @@
   <h1 class="head"><center>Broker Dash Board</center> </h1>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home Page</a>
+          <a class="nav-link active" aria-current="page" href="/2">Home Page</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/About_us">about us</a>
@@ -88,8 +88,8 @@
                 <td> {{row[2]}} </td>
                 <td> {{row[3]}} </td>
                 <td>
-                    <button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete_appointment_by_broker_row[4]}}">Delete</a></button>
-                </td>
+                    <button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete_appointment_by_broker/{{row[4]}}">Delete</a></button>
+                </td>                                                                   
                 </tr>
             {% endfor %}
         </table> 
