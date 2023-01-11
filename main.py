@@ -197,8 +197,8 @@ def login_broker():
             name= record[1]
             mobile = record[2]
             email = record[3]
-        session["c_id"] = id
-        print(session["c_id"],"by login ")
+        session["b_id"] = id
+        print(session["b_id"],"by login ")
         session["name"] = name
         session["email"] = email
         print("emil or user is ",email)
@@ -249,6 +249,7 @@ def logout():
     session["c_id"] = None
     session["email"] =None
     print('logout')
+    session["b_id"] = None
     
     return redirect("/")
 #----------------------------------------------------------------------------------------
@@ -316,10 +317,10 @@ def add_proprtrys():
     if request.method=="POST":
        print('add propety link working')
        try:
-            print(session["c_id"],"by login  again")
+            print(session["b_id"],"by login  again")
             #print(type(session["C_id"]))
             if "c_id" in session:
-                user_id = session["c_id"]
+                user_id = session["b_id"]
                 print(user_id,"session access susseefully")
 
             Sqft = float(request.form.get('sqft'))
@@ -444,8 +445,8 @@ def upload_file():
      # redirect urls
 @app.route("/login_broker_2" )
 def login_broker_2():
-    if "c_id" in session:
-        user_id = session["c_id"]
+    if "b_id" in session:
+        user_id = session["b_id"]
     else:
         return render_template("login_broker.html")
     

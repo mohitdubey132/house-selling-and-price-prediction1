@@ -157,9 +157,14 @@
     <div id="myDropdown" class="dropdown-content">
       <a href="/login">login_customer</a>
       <a href="/login_2">login_broker</a>
+      {%if session.b_id %}
       <a href="/login_broker_2"> broker deshborad</a>
-      <a href="/log_out">logout</a>
+      {%endif%}
+      {%if session.c_id%}
       <a href="/login_customer2">Customer Dashboard</a>
+      {%endif%}
+      <a href="/log_out">logout</a>
+     
     </div>
   </div>
   
