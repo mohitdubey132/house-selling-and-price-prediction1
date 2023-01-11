@@ -62,6 +62,10 @@
         <li class="nav-item">
           <a class="nav-link" href="#add_property" >Add property </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#your-properties" >Your property </a>
+        </li>
+        
       </ul>
      
     <section id="cd1">
@@ -79,7 +83,7 @@
                 <th>Customer name</th>
                 <th>Customer mobile nu</th>
                 <th>property address</th>
-                <th>Delete property</th>
+                <th>Delete appointments</th>
             </tr></h2>
             {% for row in appointments: %}
                 <tr>
@@ -94,7 +98,33 @@
             {% endfor %}
         </table> <hr>
       </section>
-      <section id="add_property" class="add_property">
+      <section class="your-properties" id="your-properties">
+        <h2> <center>YOUR PROPERTIES </center> 
+        <table border="1" class="table table-striped">
+            <tr>
+                <th>Address</th>
+                <th>size</th>
+                <th>Total-Sqft</th>
+                <th>Price</th>
+                <th>Area</th>
+                <th>Delete property</th>
+            </tr></h2>
+            {% for row in properties: %}
+                <tr>
+                <td> {{row[0]}} </td>
+                <td> {{row[1]}} </td>
+                <td> {{row[2]}} </td>
+                <td> {{row[3]}} </td>
+                <td>{{row[4]}} </td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-lg"><a href="/delete_propert/{{row[5]}}">Delete</a></button>
+                </td>                                                                   
+                </tr>
+            {% endfor %}
+        </table> <hr>
+      </section>
+    
+      <section id="add_property" class="add_property" >
         <fieldset border="1" aling="right" >
           <h1><b>Add Property</b></h1>
             <form action="/add_proprtry" method="post" >

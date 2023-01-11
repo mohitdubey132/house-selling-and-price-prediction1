@@ -42,10 +42,25 @@ def get_property():
       conn.commit()
       count= cur.rowcount
       conn.close()
+#-------------------------------------------------------------------------------------#
+    # get propertys for brokers
+def find_properties_brokers(id):
+   try:
+      cur,conn =connect_db()
+      query_To_get_property="select ADDRESS,SIZE,TOTAL_SQFT,PRICE ,AREA,P_ID from property WHERE B_ID =%s"
+      cur.execute(query_To_get_property,(id,))
+      records = cur.fetchall()
+      count = cur.rowcount
+      return records 
+   finally:
+      conn.commit()
+      count= cur.rowcount
+      conn.close()
+
 def get_property_2(Area_type,Price,Balcony,BHK):
    try:
       cur,conn =connect_db()
-      query_To_get_property="select * from property where AREA <=%s or PRICE<=%s or BALCONY >=%s or SIZE =%s"
+      query_To_get_property="select * from property where AREA <=%s or PRICE>=%s or BALCONY >=%s or SIZE =%s"
       cur.execute(query_To_get_property,(Area_type,Price,Balcony,BHK,))
       records = cur.fetchall()
       count = cur.rowcount
@@ -165,6 +180,22 @@ def delete_appointments(id):
       delete_appointment =""" delete from appointment where app_id=%s
                            """
       cur.execute(delete_appointment,(id,))
+      message = "recorde deleted successfully"
+      return maessage
+   except Exception as e:
+               maessage= "there is an problem "+ str(e)
+               return   maessage
+
+   finally:
+      conn.commit()
+      conn.close()
+#-----------------------------------------------------------------------------------#
+def delete_properties_by_broker(id):
+   try:
+      cur,conn= connect_db()
+      delete_properties =""" delete from PROPERTY where p_id=%s
+                           """
+      cur.execute(delete_properties,(id,))
       message = "recorde deleted successfully"
       return maessage
    except Exception as e:

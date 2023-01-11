@@ -203,8 +203,9 @@ def login_broker():
         session["email"] = email
         print("emil or user is ",email)
         results = db.find_appointment_brokers(str(id))
+        properties =db.find_properties_brokers(str(id))
         print ("find_appointment  successful no error in that broker",results)
-        return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
+        return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results,properties=properties)
     except Exception as e:
         message= str(e)
         return render_template("error.html",error= message)
@@ -256,13 +257,21 @@ def logout():
 def delete_app(id):
     db.delete_appointments(id)
     return redirect("/login_customer2")
-
+#-----------------------------------------------------------------------------------
 @app.route("/delete_appointment_by_broker/<string:id>", methods=['POST','GET'])    
 def delete_appointment_by_broker(id):
     ''' broker delete ppointment by app id '''
     print('delete by broker working')
     db.delete_appointments(id)
     return redirect("/login_broker_2")
+#----------------------------------------------------------------------------------
+@app.route("/delete_propert/<string:id>", methods=['POST','GET'])    
+def delete_propertyies_by_broker(id):
+    ''' broker delete properties by p_id '''
+    print('delete by broker working---------------------------------------------------------------------------------')
+    db.delete_properties_by_broker(id)
+    return redirect("/login_broker_2")
+
 #---------------------------------------------------------------------------------------
     #reschedule
 @app.route("/reschedule/<string:id> ",methods=['POST','GET'])
@@ -455,9 +464,10 @@ def login_broker_2():
             name= record[1]
             mobile = record[2]
             email = record[3]
-        results = db.find_appointment_brokers(str(id))    
+        results = db.find_appointment_brokers(str(id))   
+        properties =db.find_properties_brokers(str(id)) 
         print ("find_appointment  successful no error in that broker")
-        return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results)
+        return render_template("broker_dash.html",c_name=name,Mobile=mobile,Email=email,appointments=results,properties=properties)
     except Exception as e:
         message= str(e)
         return render_template("error.html",error= message)
